@@ -1,32 +1,31 @@
-import React, {useState} from 'react';
-import css from '../css/Home';
-import { supabase } from '../supabaseClient';
+import React, {useState} from 'react'
+import supabase from '../Config/supabaseClient';
+import '../css/LogIn.css'
 
-export default function Home() {
+export default function LogIn() {
 
-  const [name, setName] = useState("");
-  const [number, setNumber] =useState("");
+  const [name, setName] = useState('')
+  const [number, setNumber] = useState('')
+  const [formError, setFormError] = useState(null)
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const {data, error} = await supabase
-      .from('dealers')
-      .insert([{ name, number }]);
-    
-    if (error) {
-      console.error("Error adding student:", error.message)
-    }else{
-      console.log("Adding successfully")
+    const { data, error } = await supabase
+     .from('dealers')
+     .insert([{name, number}])
+   
+    if (!error){
+      setFormError(null);
+      setName('');
+      setNumber('');
+    } else {
+      setFormError("Please fil all in correctly..")
     }
-
-    setName('');
-    setNumber('');
-
   }
 
   return (
-    <div className='home'>
+    <div className='login'>
       <div className="form">
         <form onSubmit={handleSubmit}>
           <input 
@@ -45,11 +44,9 @@ export default function Home() {
             onChange={(e) => setNumber(e.target.value)} 
             required
           />
-          <button type='submit'>Add</button>
+          <button type='submit'>Open/Add</button>
         </form>
       </div>
-      
     </div>
   )
 }
- 

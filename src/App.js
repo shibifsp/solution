@@ -1,12 +1,22 @@
 
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Home from './pages/Home';
+import Index from './pages/Index';
+import Calculation from './pages/Calculation';
+import MemberInfo from './pages/MemberInfo';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <Home />
-    </div>
+    <Router>
+      <Routes>
+        <Route path='/' element={<Index />} />  
+        <Route path='/memberInfo/:id' element={<MemberInfo />} />
+        <Route path='/calculation' element={<Calculation />} /> 
+        
+      </Routes>
+    </Router>
   );
 }
 

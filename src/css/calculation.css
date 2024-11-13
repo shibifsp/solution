@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+.calculation {
+  padding: 30px 10px;
+  background: #aaaaaa;
+  border-radius: 5px;
+  min-height: 100vh;
+}
+.calculation .container {  
+  background: #fff;
+  width: 70%;
+  min-height: 90vh;
+  border-radius: 5px;
+  margin: 0px auto;
+}
+.calculation .nav-bar {
+  background: #0B2F9F;
+  padding: 18px 16px;
+}
+.calculation .content {
+  display: flex;
+  padding: 10px;
+}
+.calculation .calculation-contents {
+  flex:1;
+  width: 60%;
+}
+.calculation-contents table {
+  width: 100%;
+}
+.calculation-contents th, .calculation-contents td {
+  padding: 10px 16px;
+  border: 1px solid #ddd;
+}
+tfoot th {
+  text-align: left;
+  
+}
+.buttons {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+.buttons button {
+  padding: 11px 16px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
