@@ -21,8 +21,12 @@ export default function Calculation() {
                 </thead>
                 <tbody>
                   <tr>
-                    <input type="text" />
-                    <input type="text" />
+                    <td className='input-row'>
+                      <input type="text" />
+                    </td> 
+                    <td className='input-row'>
+                      <input type="text" />
+                    </td>
                     <td className="button">
                       <button>+</button>
                       <button>-</button>
