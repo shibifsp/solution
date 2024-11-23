@@ -20,43 +20,119 @@
   background: #0B2F9F;
   padding: 18px 16px;
 }
-.calculation .content {
+
+.table-form {
+  width: 90%;
+  margin: 10px 10px;
+}
+.table-form .table-head, .table-form .row {
   display: flex;
-  padding: 10px;
-}
-.calculation .calculation-contents {
-  flex:1;
-  width: 60%;
-}
-.calculation-contents table {
+  align-items: center;
+  text-align: center;
   width: 100%;
 }
-.calculation-contents td.input-row {
-  border: none !important;
-  padding: 0;
-
+.table-form {
+  width: 90%;
+  box-sizing: border-box;
 }
-input {
-  padding: 10px 16px;
+.table-form .table-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.table-form .table-head .info, .table-form .table-head .type {
   border: 1px solid #ddd;
+  padding: 8px 16px;
+  margin: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.table-form .table-head .info {
+  width: 35%;
+}
+.table-form .table-head .type {
+  width: 10%;
+}
+.table-form .table-head h2 {
+  font-size: 16px;
+}
+
+.table-form .middle {
+   width: 100%;
+}
+.table-form .middle .row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.table-form .middle .row .input {
+  width: 35%;
+  margin: 1px;
+}
+.table-form .middle .row .input input, .type-select input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+}
+.table-form .middle .row .type-select  {
+ width: 10%;
+}
+.table-form .middle .row .btn-out {
+  width: 15%;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.table-form .middle .row .btn-out button {
+  padding: 3px 9px;
+}
+.error {
+  color: red;
+  font-size: 12px
+}
+.button {
+  text-align: center;
+  margin: 10px auto;
+}
+.button button {
+  padding: 6px 24px;
+  border-radius: 3px;
+  border: 1px solid #1b1b1b;
+}
+
+div.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #ddd;
+  padding: 10px 16px;
+  margin-top: 10px;
+}
+div.footer h2 {
+  font-size: 16px;
+}
+
+
+div.history {
+  max-width: 900px;
+  width: 80%;
+  margin: 18px auto;
+  height: 200px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.history table {
   width: 100%;
 }
-.calculation-contents th, .calculation-contents td {
-  padding: 10px 16px;
+.history table thead th {
+  position: sticky;
+  top: 0;
+  background: #fff;
+}
+.history table th, .history table td {
   border: 1px solid #ddd;
+  gap: 1px;
+  padding: 8px 12px;
 }
-tfoot th {
-  text-align: left;
-  
-}
-.buttons {
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-}
-.buttons button {
-  padding: 11px 16px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
-
