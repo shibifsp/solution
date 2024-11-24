@@ -49,7 +49,7 @@ export default function LogIn() {
             onChange={(e) => setNumber(e.target.value)} 
             required
           />
-          <button type='submit'>
+          <button type='submit'className='login'>
               Open/Add
           </button>
         </form>
