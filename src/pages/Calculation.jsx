@@ -1,8 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import '../css/calculation.css'
 import supabase from '../Config/supabaseClient';
+import { useParams } from 'react-router-dom';
 
 export default function Calculation() {
+
+  const {name} = useParams();
+
   const [error, setError] = useState();
   const [fetchDatas, setFetchDatas] = useState([]);
   const [total, setTotal] = useState (0)
@@ -85,7 +89,7 @@ export default function Calculation() {
     <div className='calculation'>
       <div className="container">
         <div className="nav-bar">
-          <h1>Name</h1>
+          <h1>{name}</h1>
         </div>
 
         <div className="table-form">
