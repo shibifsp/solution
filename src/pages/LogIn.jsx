@@ -1,12 +1,15 @@
 import React, {useState} from 'react'
 import supabase from '../Config/supabaseClient';
 import '../css/LogIn.css'
+import { useNavigate } from 'react-router-dom';
 
 export default function LogIn() {
 
   const [name, setName] = useState('')
   const [number, setNumber] = useState('')
   const [formError, setFormError] = useState(null)
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -19,6 +22,8 @@ export default function LogIn() {
       setFormError(null);
       setName('');
       setNumber('');
+
+      navigate('/');
     } else {
       setFormError("Please fil all in correctly..")
     }
@@ -44,7 +49,9 @@ export default function LogIn() {
             onChange={(e) => setNumber(e.target.value)} 
             required
           />
-          <button type='submit'>Open/Add</button>
+          <button type='submit'>
+              Open/Add
+          </button>
         </form>
       </div>
     </div>

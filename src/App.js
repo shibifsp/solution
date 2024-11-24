@@ -4,6 +4,7 @@ import './App.css';
 import Index from './pages/Index';
 import Calculation from './pages/Calculation';
 import MemberInfo from './pages/MemberInfo';
+import LogIn from './pages/LogIn';
 
 
 
@@ -13,8 +14,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Index />} />  
         <Route path='/memberInfo/:id' element={<MemberInfo />} />
-        <Route path='/calculation' element={<Calculation />} /> 
-        
+        <Route path='/calculation/:name' element={<Calculation />} />
+        <Route path='/logIn' element={<LogIn />} /> 
       </Routes>
     </Router>
   );

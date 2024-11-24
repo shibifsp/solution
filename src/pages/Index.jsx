@@ -3,6 +3,7 @@ import supabase from "../Config/supabaseClient"
 import '../css/Index.css';
 import { FaSearch } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 export default function Index() {
@@ -62,15 +63,15 @@ export default function Index() {
               {members.map((member, id) => (
                 <li key={id}
                   onClick={() => {
-                    navigate(`/memberInfo/${member.id}`)
+                    navigate(`/calculation/${member.name}`)
                   }}
                 >{member.name}</li>
               ))}
             </ul> 
           </div>
-          <button className="add-member">
+          <Link to={"/login"} className="add-member">
             ADD MEMBER
-          </button>
+          </Link>
         </div>
       </div>
     </div>

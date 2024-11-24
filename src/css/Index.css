@@ -92,11 +92,14 @@
 }
 .add-member {
   margin: 0px auto;
-  display: block;
-  font-weight: 900;
   padding: 14px 24px;
   color: #fff;
   background: #0B2F9F;
   border-radius: 21px;
   border: none;
+  display: block;
+  text-decoration:none;
+  font-weight: 900;
+  width: 40%;
+  text-align: center;
 }
