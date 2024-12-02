@@ -19,7 +19,7 @@ export default function Index() {
       setLoading(true)
       const { data, error } = await supabase
         .from('dealers')
-        .select('name')
+        .select('*')
 
       if (error) {
         console.error("Error fetching members", error);
@@ -36,6 +36,19 @@ export default function Index() {
 
   const handleSearchItem = (e) => {
     setSearchItem(e.target.value)
+  }
+  
+  const removeMember = async () => {
+    const { data, error } = await supabase
+      .from('dealers')
+      .select('name')
+      .del('name',id)
+
+    if(error){
+      console.error(error)
+    } else {
+      
+    }
   }
 
   return (
@@ -61,11 +74,15 @@ export default function Index() {
             <div className="blur"></div>
             <ul>
               {members.map((member, id) => (
-                <li key={id}
-                  onClick={() => {
-                    navigate(`/calculation/${member.name}`)
+                <div className="member-row">
+                  <li key={id}
+                    onClick={() => {
+                      navigate(`/calculation/${member.id}`)
                   }}
-                >{member.name}</li>
+                  >{member.name}</li>
+
+                  <img src="https://cdn-icons-png.flaticon.com/512/8835/8835390.png" alt="Recycle bin free icon" title="Recycle bin free icon" onClick={removeMember}/> 
+                </div>               
               ))}
             </ul> 
           </div>
