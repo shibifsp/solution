@@ -4,6 +4,7 @@ import '../css/Index.css';
 import { FaSearch } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import CustomAlert from './CustomAlert';
 
 
 export default function Index() {
@@ -11,6 +12,7 @@ export default function Index() {
   const [searchItem, setSearchItem] = useState(""); 
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState("");
+  const [showRemoveMember, setShowRemoveMember] = useState(false);
 
   const navigate = useNavigate();
 
@@ -38,16 +40,17 @@ export default function Index() {
     setSearchItem(e.target.value)
   }
   
-  const removeMember = async () => {
+  const removeMember = async (id) => {
     const { data, error } = await supabase
       .from('dealers')
-      .select('name')
-      .del('name',id)
+      .delete()
+      .eq('id',id)
 
     if(error){
       console.error(error)
     } else {
-      
+      console.log("Member removed successfully",data)
+      setMembers(members.filter((member) => member.id !== id))
     }
   }
 
@@ -73,19 +76,30 @@ export default function Index() {
           <div className="members">
             <div className="blur"></div>
             <ul>
-              {members.map((member, id) => (
+            {members.map((member, id) => (
                 <div className="member-row">
                   <li key={id}
                     onClick={() => {
                       navigate(`/calculation/${member.id}`)
                   }}
                   >{member.name}</li>
+                  <div className="img-delete"  onClick={() => setShowRemoveMember(true)}>
+                    <img src="https://cdn-icons-png.flaticon.com/512/8835/8835390.png" alt="Recycle bin free icon" title="Recycle bin free icon"/> 
+                  </div>
 
-                  <img src="https://cdn-icons-png.flaticon.com/512/8835/8835390.png" alt="Recycle bin free icon" title="Recycle bin free icon" onClick={removeMember}/> 
-                </div>               
+                  {showRemoveMember && 
+                    <CustomAlert 
+                      message="Do you want to delete [member.name] and all their data? This action is permanent."
+                      onSure={() => removeMember(member.id)}
+                      onCancel={() => setShowRemoveMember(false)}
+                  />}
+    
+
+                </div> 
+                
               ))}
             </ul> 
-          </div>
+          </div>      
           <Link to={"/login"} className="add-member">
             ADD MEMBER
           </Link>

@@ -48,6 +48,7 @@ export default function Calculation() {
       } else {
         calculateSum(fetchSum);
         setFetchDatas(fetchSum);
+        setShowAlert(false) 
       }
     };
 
@@ -79,6 +80,7 @@ export default function Calculation() {
       setError(null);
       setDatas([{info: "", amount: "", type:"", coustomer_id: id}])
       fetchData()
+      console.log(validRows)
     } else {
       setError("please fill all in correctly..")
     }
@@ -116,9 +118,7 @@ export default function Calculation() {
 
     if(totalAmount === 0) {
       setShowAlert(true)
-    }
-
-   
+    }   
   }
 
   const clearData = async () => {
@@ -226,19 +226,23 @@ export default function Calculation() {
           <table>
             <thead>
               <tr>
+             
                 <th>Info</th>
                 <th>Amount</th>
                 <th>Type</th>
               </tr>
             </thead>
             <tbody>
-              {fetchDatas.map((fData, index) => (
+              {fetchDatas.map((fData, index) => {
+             
+                (
                 <tr key={index}>
+              
                   <td>{fData.info}</td>
                   <td>{fData.amount}</td>
                   <td className='td_type'>{fData.type ==='D' ? 'DEBIT' : 'CREDIT'}</td>
-                </tr>
-              ))}
+                </tr>      
+              )})}
             </tbody> 
           </table>
         </div>

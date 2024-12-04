@@ -1,12 +1,10 @@
 * {
   box-sizing: border-box;
 }
-.index {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background: #dad8d8d7;
+div.content {
+  width: 100%;
+  height: 100%;
+  background: #aaaaaa;
 }
 div.form {
   display: flex;
@@ -14,7 +12,8 @@ div.form {
   align-items: center;
   padding: 50px;
   width: 40%;
-  margin: 30px auto;
+  height: auto;
+  margin: 60px auto;
   background: #0B2F9F;
   border-radius: 5px;
 }

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import supabase from '../Config/supabaseClient';
-import '../css/LogIn.css'
 import { useNavigate } from 'react-router-dom';
+import '../css/LogIn.css'
 
 export default function LogIn() {
 
@@ -30,7 +30,7 @@ export default function LogIn() {
   }
 
   return (
-    <div className='login'>
+    <div className='content'>
       <div className="form">
         <form onSubmit={handleSubmit}>
           <input 
@@ -50,7 +50,7 @@ export default function LogIn() {
             required
           />
           <button type='submit'className='login'>
-              Open/Add
+              Add
           </button>
         </form>
       </div>
