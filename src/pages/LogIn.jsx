@@ -30,7 +30,7 @@ export default function LogIn() {
   }
 
   return (
-    <div className='content'>
+    <div className='container-login'>
       <div className="form">
         <form onSubmit={handleSubmit}>
           <input 

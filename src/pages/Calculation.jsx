@@ -1,12 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import '../css/calculation.css'
 import supabase from '../Config/supabaseClient';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import CustomAlert from './CustomAlert';
+import moment from 'moment';
+import HomeIcon from '../images/icons8-homepage-50.png';
 
 export default function Calculation() {
 
   const {id} = useParams();
+
 
   const [error, setError] = useState();
   const [fetchDatas, setFetchDatas] = useState([]);
@@ -147,7 +150,14 @@ export default function Calculation() {
     <div className='calculation'>
       <div className="container">
         <div className="nav-bar">
-          <h1>{name}</h1>
+          <Link to={`/memberInfo/${id}`}>
+            <h1>{name}</h1> 
+          </Link>
+          <div className="img-home-icon">
+            <Link to={`/memberInfo/${id}`}>
+             <img src={HomeIcon} alt="Home-icon" />
+            </Link>
+          </div>
         </div>
 
         <div className="table-form">
@@ -202,11 +212,13 @@ export default function Calculation() {
                 </div>
               ))}      
             </div>
+            
             <div className="button">
               <button type='submit'>Submit</button>
               <button onClick={clearData}>clear</button>
             </div>
           </form>
+
           <div className="footer">
             <h2>Total balance</h2>
             <h2>{total}</h2>
@@ -226,22 +238,23 @@ export default function Calculation() {
           <table>
             <thead>
               <tr>
-             
+                <th>Date</th>
                 <th>Info</th>
                 <th>Amount</th>
                 <th>Type</th>
               </tr>
             </thead>
             <tbody>
-              {fetchDatas.map((fData, index) => {
-             
-                (
-                <tr key={index}>
-              
-                  <td>{fData.info}</td>
-                  <td>{fData.amount}</td>
-                  <td className='td_type'>{fData.type ==='D' ? 'DEBIT' : 'CREDIT'}</td>
-                </tr>      
+              {fetchDatas.map((fData, index) =>{
+                  const fetchedDate = fData.date;
+                  const formattedDate = moment(fetchedDate).format('DD-MMM-yyyy')
+                return( 
+                  <tr key={index}>
+                    <td className='td-date'>{formattedDate}</td>
+                    <td>{fData.info}</td>
+                    <td>{fData.amount}</td>
+                    <td className='td_type'>{fData.type ==='D' ? 'DEBIT' : 'CREDIT'}</td>
+                  </tr>    
               )})}
             </tbody> 
           </table>

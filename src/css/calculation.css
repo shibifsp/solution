@@ -9,7 +9,6 @@ button {
 .calculation {
   padding: 30px 10px;
   background: #aaaaaa;
-  border-radius: 5px;
   min-height: 100vh;
 }
 .calculation .container {  
@@ -22,6 +21,22 @@ button {
 .calculation .nav-bar {
   background: #0B2F9F;
   padding: 18px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.calculation .nav-bar h1 {
+  cursor: pointer;
+  color: #000;
+  text-decoration: none;
+  display: inline-block;
+}
+.calculation .nav-bar .img-home-icon {
+  width: 50px;
+}
+.calculation .nav-bar img {
+  cursor: pointer;
+  width: 100%;
 }
 
 .table-form {
@@ -33,10 +48,6 @@ button {
   align-items: center;
   text-align: center;
   width: 100%;
-}
-.table-form {
-  width: 90%;
-  box-sizing: border-box;
 }
 .table-form .table-head {
   width: 100%;
@@ -169,7 +180,13 @@ div.history {
   gap: 1px;
   padding: 8px 12px;
   padding-left: 20px;
+  color: #000;
 }
 .history table .td_type {
   font-size: 14px;
+}
+.history table .td-date {
+  font-size: 12px;
+  font-weight: bold;
+  color: #636262;
 }

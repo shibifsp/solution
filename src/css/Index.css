@@ -82,32 +82,52 @@
   top: 0;
   scroll-behavior: smooth;
 }
+
 .members ul {
   list-style: none;
 }
 .members .member-row {
+  border-bottom: 1px solid #ddd;
+  padding: 1px 10px;
+}
+.member-row .content-members {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #ddd;
-}
-.member-row .img-delete {
-  padding: 8px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-.member-row .img-delete:hover {
-  background: rgb(191, 211, 238);
-}
-.members .member-row img {
-  width: 15px;
-  height: 15px;
-  cursor: pointer;
 }
 .members ul li {
-  padding: 10px 8px;
   cursor: pointer;
-  flex: 1;
+  flex: 3;
 }
+div.date {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  text-align: center;
+  background: #fff;
+  border-radius: 2px;
+  padding: 2px;
+  margin-right: 10px;
+}
+div.date .current-date {
+  font-size: 8px;
+  font-weight: bold;
+  color: #353434;
+}
+div.date .current-total {
+  color: #524f4f;
+  font-weight: bold;
+  font-size: 18px;
+}
+.members .member-row .img-delete img {
+  width: 19px;
+  height: 19px;
+  cursor: pointer;
+  filter: opacity(0.5);
+}
+.members .member-row .img-delete img:hover{
+  filter: opacity(1);
+}
+
 .add-member {
   margin: 0px auto;
   padding: 14px 24px;

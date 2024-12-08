@@ -5,14 +5,15 @@ import { FaSearch } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import CustomAlert from './CustomAlert';
-
+import moment from 'moment';
 
 export default function Index() {
    
-  const [searchItem, setSearchItem] = useState(""); 
+  const [searchItem, setSearchItem] = useState([]); 
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState("");
   const [showRemoveMember, setShowRemoveMember] = useState(false);
+  const [everyTotal, setEveryTotal] = useState([])
 
   const navigate = useNavigate();
 
@@ -31,10 +32,24 @@ export default function Index() {
       }
       setLoading(false)
     };
-
     fetchDealers();
-
+    fetchTotal();
   },[])
+
+  const fetchTotal = async () => {
+    const { data, error } = await supabase
+      .from('calculations')
+      .select('*')
+
+    if(error) {
+      console.error("Error fetching data for Total", error)
+    } else {
+      setEveryTotal(data)
+      console.log("Fetched total datas",data)
+    }
+      
+  }
+
 
   const handleSearchItem = (e) => {
     setSearchItem(e.target.value)
@@ -53,6 +68,8 @@ export default function Index() {
       setMembers(members.filter((member) => member.id !== id))
     }
   }
+
+
 
   return (
     <div className='index'>
@@ -76,16 +93,37 @@ export default function Index() {
           <div className="members">
             <div className="blur"></div>
             <ul>
-            {members.map((member, id) => (
+            {members.filter((member) => member.name.toLowerCase().includes(searchItem)).map((member, id) =>{
+                const currentTotal = everyTotal.filter((total) => total.coustomer_id === member.id);
+                const everySum = currentTotal.reduce((total,item) => {
+                  const amount = parseFloat(item.amount) || 0;
+                  return item.type === 'C' ? amount + total : total - amount;
+                },0)
+
+                const takedDate = member.date;
+                const formattedTakedDate = moment(takedDate).format('DD-MM-YYYY');
+                
+              return (
                 <div className="member-row">
-                  <li key={id}
-                    onClick={() => {
-                      navigate(`/calculation/${member.id}`)
-                  }}
-                  >{member.name}</li>
-                  <div className="img-delete"  onClick={() => setShowRemoveMember(true)}>
-                    <img src="https://cdn-icons-png.flaticon.com/512/8835/8835390.png" alt="Recycle bin free icon" title="Recycle bin free icon"/> 
+                  <div className="content-members">
+                    <li key={id}
+                        onClick={() => {
+                          navigate(`/calculation/${member.id}`)
+                      }}>{member.name}
+                    </li>
+                    <div className="date">
+                      <p className="current-date">
+                        {formattedTakedDate}
+                      </p>
+                      <p className="current-total">
+                        {everySum}
+                      </p>
+                    </div>
+                    <div className="img-delete"  onClick={() => setShowRemoveMember(true)}>
+                      <img src="https://cdn-icons-png.flaticon.com/512/8835/8835390.png" alt="Delete icon member" title="Recycle bin free icon"/> 
+                    </div>
                   </div>
+                  
 
                   {showRemoveMember && 
                     <CustomAlert 
@@ -93,11 +131,9 @@ export default function Index() {
                       onSure={() => removeMember(member.id)}
                       onCancel={() => setShowRemoveMember(false)}
                   />}
-    
-
                 </div> 
-                
-              ))}
+              )
+            })}
             </ul> 
           </div>      
           <Link to={"/login"} className="add-member">

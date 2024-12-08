@@ -1,3 +1,84 @@
-.member-info table td {
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+div.memberInfo {
+  padding: 10px 30px;
+  background: #aaaaaa;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.memberInfo .container-details {
+  background: #fff;
+  border-radius: 5px;
+  width: 50%;
+  height: 85vh;
+  margin-right: 20px;
+  overflow: hidden;
+}
+.memberInfo .container-about {
+  background: #fff;
+  border-radius: 5px;
+  width: 35%;
+  height: 85vh;
+  margin-right: 20px;
+}
+div.container-details .nav-bar {
+  background: #0B2F9F;
   padding: 10px;
+}
+div.container-details .nav-bar h1 {
+  color: #28a745;
+  
+}
+
+div.content-memberInfo{
+  padding: 10px;
+  height: 85%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+div.content-memberInfo thead {
+  position: sticky;
+  top: 0;
+  background: #fff;
+}
+div.content-memberInfo table {
+  width: 100%;
+}
+div.content-memberInfo table th, div.content-memberInfo table td {
+border: 1px solid #ddd;
+gap: 1;
+padding: 8px 10px;
+}
+.content-memberInfo table td.date {
+  font-size: 12px;
+  font-weight: bold;
+  color: #636262;
+}
+.content-memberInfo table td.type {
+  font-size: 12px;
+  font-weight: bold;
+  color: #636262;
+}
+.content-memberInfo th.blank {
+  border: none;
+}
+.content-memberInfo td.delete {
+  display: flex;
+  align-items: center;
+  border: none;
+  padding: 8px 0;
+}
+.content-memberInfo td.delete img {
+  width: 19px;
+  height: 19px;
+  cursor: pointer;
+  filter: opacity(0.5);
+}
+.content-memberInfo td.delete img:hover {
+  filter: none;
 }
