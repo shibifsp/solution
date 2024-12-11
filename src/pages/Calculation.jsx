@@ -166,10 +166,10 @@ export default function Calculation() {
               <label htmlFor='info' className="info">
                 <h2>Info</h2>
               </label>  
-              <label for='amount' className="info">
+              <label htmlFor='amount' className="info">
                 <h2>Amount</h2>
               </label>
-              <label for='type' className="type">
+              <label htmlfor='type' className="type">
                   <h2>Type</h2>
               </label>
             </div>
@@ -206,8 +206,8 @@ export default function Calculation() {
                     />
                   </div>
                   <div className="btn-out">
-                    <button className='add' onClick={addRow}>Add</button>
-                    <button className='delete' onClick={() => deleteRow(index)}>Delete</button>
+                    <button type='button' className='add' onClick={addRow}>Add</button>
+                    <button type='button' className='delete' onClick={() => deleteRow(index)}>Delete</button>
                   </div>
                 </div>
               ))}      

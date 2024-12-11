@@ -29,6 +29,7 @@ div.memberInfo {
 div.container-details .nav-bar {
   background: #0B2F9F;
   padding: 10px;
+  margin-bottom: 10px;
 }
 div.container-details .nav-bar h1 {
   color: #28a745;
@@ -36,8 +37,8 @@ div.container-details .nav-bar h1 {
 }
 
 div.content-memberInfo{
-  padding: 10px;
-  height: 85%;
+  padding: 0px 10px;
+  height: 75%;
   overflow-y: auto;
   scrollbar-width: thin;
 }
@@ -53,6 +54,9 @@ div.content-memberInfo table th, div.content-memberInfo table td {
 border: 1px solid #ddd;
 gap: 1;
 padding: 8px 10px;
+}
+div.content-memberInfo table th.blank {
+  width: 5%;
 }
 .content-memberInfo table td.date {
   font-size: 12px;
@@ -82,3 +86,33 @@ padding: 8px 10px;
 .content-memberInfo td.delete img:hover {
   filter: none;
 }
+.container-details .footer {
+  width: 94%;
+  margin: 0px 10px;
+}
+.container-details .footer h3.sum {
+  font-size: 16px;
+}
+.container-details .footer h3.sum {
+  font-size: 21px;
+  color: #636262
+}
+
+.memberInfo .container-about {
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.memberInfo .container-about .top {
+  height: 50%;
+}
+.memberInfo .container-about .bottom {
+  height: 50%;
+}
+.memberInfo .container-about .img-about {
+  background: #0B2F9F;
+  height: 100%;
+  width: 100%;
+}
+

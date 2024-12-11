@@ -66,6 +66,7 @@ export default function Index() {
     } else {
       console.log("Member removed successfully",data)
       setMembers(members.filter((member) => member.id !== id))
+      setShowRemoveMember(false)
     }
   }
 

@@ -89,6 +89,8 @@ button {
 }
 .table-form .middle .row .input input, .type-select input {
   width: 100%;
+  font-size: 16px;
+  text-align: center;
   padding: 10px 12px;
   border: 1px solid #ddd;
 }
@@ -155,7 +157,7 @@ div.footer {
   margin-top: 10px;
 }
 div.footer h2 {
-  font-size: 16px;
+  font-size: 22px;
 }
 
 

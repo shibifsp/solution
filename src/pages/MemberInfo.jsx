@@ -8,8 +8,9 @@ export default function MemberInfo() {
 
   const { id } = useParams();
   const [dataDefined, setDataDefined] = useState([]);
+  const [personalTotal, setPersonalTotal] = useState(0);
  
-  useEffect(  () => {
+  useEffect( () => {
     const takeData = async () => {
       const { data, error } = await supabase
        .from('calculations')
@@ -19,13 +20,25 @@ export default function MemberInfo() {
       if(error){
         console.error("Your fetchData isn't fetch", error)
       } else {
-        setDataDefined(data);
+        setDataDefined(data || []);
       }
     }
     takeData();
-   },[id])
+  },[id])
 
-   const deleteRow = async (itemId) => {
+  useEffect( () => {
+    const personalSum = () => {
+      const sum = dataDefined.reduce((total, data) => {
+        return data.type === "C"
+          ? total + data.amount
+          : total - data.amount;
+      },0)
+      setPersonalTotal(sum);
+    };
+    personalSum();
+  },[dataDefined])
+
+  const deleteRow = async (itemId) => {
     const { data, error } = await supabase  
       .from('calculations')
       .delete()
@@ -36,7 +49,7 @@ export default function MemberInfo() {
     } else {
       setDataDefined(dataDefined.filter((row) => row.id !== itemId));
     }
-   }
+  }
 
   return (
     <>
@@ -67,20 +80,34 @@ export default function MemberInfo() {
                       <td>{item.amount}</td>
                       <td className='type'>{item.type === 'C' ? "Credit" : "Debit"}</td>
                       <td className='delete'>
-                       <img src="https://cdn-icons-png.flaticon.com/128/11540/11540197.png" srcset="https://cdn-icons-png.flaticon.com/128/11540/11540197.png 4x" alt="Delete" 
+                       <img src="https://cdn-icons-png.flaticon.com/128/11540/11540197.png" srcSet="https://cdn-icons-png.flaticon.com/128/11540/11540197.png 4x" alt="Delete" 
                        onClick={() => {deleteRow(item.id)}} />
                       </td>
                     </tr>
                   )  
                 })}
                 
-              </tbody>
-            </table>
+              </tbody>         
+            </table>   
           </div>
+
+          <div className="footer">
+              <h3>Total balance</h3>
+              <h3 className="sum">{personalTotal}</h3>
+          </div>
+
         </div>
         <div className="container-about">
-          <div className="nav-bar">
-
+          <div className="top">
+                <div className="img-about">
+                  Image
+                </div>
+          </div>
+          <div className="bottom">
+                <h1>Full Name</h1>
+                <h2>Nickname</h2>
+                <h2>9545601211</h2>
+                <h2>Gmail</h2>
           </div>
         </div>
       </div>
