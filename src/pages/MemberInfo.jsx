@@ -3,12 +3,16 @@ import { useParams } from 'react-router-dom';
 import supabase from '../Config/supabaseClient';
 import '../css/MemberInfo.css';
 import moment from 'moment';
+import EditForm from './EditForm';
 
 export default function MemberInfo() {
 
   const { id } = useParams();
   const [dataDefined, setDataDefined] = useState([]);
   const [personalTotal, setPersonalTotal] = useState(0);
+  const [showForm, setShowForm] = useState(false);
+
+  const customerData = dataDefined.filter(item => item.coustomer_id === id)
  
   useEffect( () => {
     const takeData = async () => {
@@ -100,15 +104,23 @@ export default function MemberInfo() {
         <div className="container-about">
           <div className="top">
                 <div className="img-about">
-                  Image
+                  <p>Image</p>
+                </div>
+                <div className="icon-edit">
+                  <img src="https://cdn-icons-png.flaticon.com/128/1159/1159633.png" loading="lazy" alt="Edit " title="Edit" onClick={() => setShowForm(true)} />
                 </div>
           </div>
           <div className="bottom">
-                <h1>Full Name</h1>
-                <h2>Nickname</h2>
+                <h1>{customerData.name}</h1>
                 <h2>9545601211</h2>
+                <h2>Place</h2>
                 <h2>Gmail</h2>
           </div>
+
+          {showForm && 
+            <EditForm
+              onSave={() => setShowForm(true)}
+            />}
         </div>
       </div>
     </>

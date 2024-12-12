@@ -155,7 +155,7 @@ export default function Calculation() {
           </Link>
           <div className="img-home-icon">
             <Link to={`/memberInfo/${id}`}>
-             <img src={HomeIcon} alt="Home-icon" />
+             <img src={HomeIcon} alt="Home-icon" title='Home'/>
             </Link>
           </div>
         </div>

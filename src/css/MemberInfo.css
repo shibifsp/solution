@@ -98,21 +98,52 @@ div.content-memberInfo table th.blank {
   color: #636262
 }
 
-.memberInfo .container-about {
-  
+.memberInfo .container-about { 
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .memberInfo .container-about .top {
-  height: 50%;
+  height: 40%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.memberInfo .top .img-about {
+  width: 60%;
+  background: #0B2F9F;
+  height: 100%;
+}
+.memberInfo .top .img-about p {
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 22px;
+  margin-top: 30px;
+}
+.memberInfo .top .icon-edit {
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.memberInfo .top .icon-edit img {
+  height: 22px;
+  empty-cells: 22px;
 }
 .memberInfo .container-about .bottom {
   height: 50%;
+  padding: 22px;
+  width: 80%;
 }
-.memberInfo .container-about .img-about {
-  background: #0B2F9F;
-  height: 100%;
-  width: 100%;
+.memberInfo .container-about .bottom h1 {
+  font-size: 22px;
 }
+.memberInfo .container-about .bottom h2 {
+  font-size: 18px;
+}
+
 

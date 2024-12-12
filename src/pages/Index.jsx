@@ -121,7 +121,7 @@ export default function Index() {
                       </p>
                     </div>
                     <div className="img-delete"  onClick={() => setShowRemoveMember(true)}>
-                      <img src="https://cdn-icons-png.flaticon.com/512/8835/8835390.png" alt="Delete icon member" title="Recycle bin free icon"/> 
+                      <img src="https://cdn-icons-png.flaticon.com/512/8835/8835390.png" alt="Delete icon member" title="Delete this Member"/> 
                     </div>
                   </div>
                   

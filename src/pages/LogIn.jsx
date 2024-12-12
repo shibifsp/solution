@@ -33,17 +33,21 @@ export default function LogIn() {
     <div className='container-login'>
       <div className="form">
         <form onSubmit={handleSubmit}>
+          <label htmlFor="fullName">Name:</label>
           <input 
             className='name'
             type="text" 
             placeholder='Enter the name'
+            id='fullName'
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
           />
+          <label htmlFor="phNumber">Phone No:</label>
           <input 
             className='phNumber'
             type="text"
+            id='phNumber'
             placeholder='Enter number'
             value={number}
             onChange={(e) => setNumber(e.target.value)} 

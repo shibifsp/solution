@@ -95,6 +95,7 @@
   align-items: center;
 }
 .members ul li {
+  font-size: 18px;
   cursor: pointer;
   flex: 3;
 }
@@ -116,7 +117,7 @@ div.date .current-date {
 div.date .current-total {
   color: #524f4f;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 21px;
 }
 .members .member-row .img-delete img {
   width: 19px;
