@@ -22,7 +22,6 @@ export default function LogIn() {
       setFormError(null);
       setName('');
       setNumber('');
-
       navigate('/');
     } else {
       setFormError("Please fil all in correctly..")

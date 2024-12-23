@@ -10,7 +10,9 @@ button {
   padding: 30px 10px;
   background: #aaaaaa;
   min-height: 100vh;
+  position: relative;
 }
+
 .calculation .container {  
   background: #fff;
   width: 70%;
@@ -191,4 +193,16 @@ div.history {
   font-size: 12px;
   font-weight: bold;
   color: #636262;
+}
+
+div.home-icon {
+  position: absolute;
+  top: 40px;
+  left: 30px;
+  z-index: 1;
+}
+div.home-icon img {
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
 }

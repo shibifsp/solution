@@ -141,9 +141,16 @@ div.content-memberInfo table th.blank {
 }
 .memberInfo .container-about .bottom h1 {
   font-size: 22px;
+  margin-bottom: 3px;
 }
 .memberInfo .container-about .bottom h2 {
   font-size: 18px;
+  color: #0255a4;
 }
-
+.memberInfo .container-about .bottom h2.place {
+  color: #000;
+}
+.memberInfo .container-about .bottom h2.email {
+  font-size: 14px;
+}
 

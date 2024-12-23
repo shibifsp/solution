@@ -4,15 +4,18 @@ import supabase from '../Config/supabaseClient';
 import '../css/MemberInfo.css';
 import moment from 'moment';
 import EditForm from './EditForm';
+import { Link } from 'react-router-dom';
+
 
 export default function MemberInfo() {
 
   const { id } = useParams();
   const [dataDefined, setDataDefined] = useState([]);
+  const [about, setAbout] = useState();
   const [personalTotal, setPersonalTotal] = useState(0);
   const [showForm, setShowForm] = useState(false);
 
-  const customerData = dataDefined.filter(item => item.coustomer_id === id)
+
  
   useEffect( () => {
     const takeData = async () => {
@@ -28,6 +31,22 @@ export default function MemberInfo() {
       }
     }
     takeData();
+  },[id])
+
+  useEffect (() => {
+    const fetchDealerTable = async () => {
+      const { data, error } = await supabase
+        .from('dealers')
+        .select('*')
+        .eq('id', id)
+
+      if(error) {
+        console.error("Your fetcing name is incorrect!..")
+      } else {
+        setAbout(data && data.length > 0 ? data[0] : <h2>The about array is empty...</h2>);
+      }
+    }
+    fetchDealerTable()
   },[id])
 
   useEffect( () => {
@@ -56,7 +75,7 @@ export default function MemberInfo() {
   }
 
   return (
-    <>
+    
       <div className='memberInfo'>
         <div className="container-details">
           <div className="nav-bar">
@@ -111,19 +130,41 @@ export default function MemberInfo() {
                 </div>
           </div>
           <div className="bottom">
-                <h1>{customerData.name}</h1>
-                <h2>9545601211</h2>
-                <h2>Place</h2>
-                <h2>Gmail</h2>
+            {about ? (
+              <>
+                <h1>{about.name}</h1>
+                <h2>{about.number}</h2>
+                <h2 className='place'>{about.place}</h2>
+                <h2 className='email'>{about.email}</h2>
+                {!about.name || !about.number||!about.place||!about.email ? <div>
+                  <img src="https://cdn-icons-png.flaticon.com/128/15632/15632210.png" loading="lazy" alt="Add " title="Add " width="64" height="64" />
+                </div>: null} 
+                
+              </>
+            ) : <h1>Your fetch datas are not found</h1>}
           </div>
 
           {showForm && 
-            <EditForm
-              onSave={() => setShowForm(true)}
-            />}
+            <div className="editing">
+              <EditForm
+              onSave={() => setShowForm(false)}
+              id = {id}
+            />
+            </div>
+            }
         </div>
+        <div className="home-icon">
+          <Link to={`/`}>
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/9449/9449216.png"
+              alt="Home"
+              title="Home"
+              class="lzy lazyload--done"
+            />
+          </Link>
       </div>
-    </>
+      </div>
+    
    
   )
 }
