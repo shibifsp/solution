@@ -53,6 +53,7 @@ export default function EditForm({ onSave, id }) {
       
   }
 
+  console.log(editingData)
   return (
     <div className='edit-form'>
       <form onSubmit={postEditedData}>
@@ -102,6 +103,7 @@ export default function EditForm({ onSave, id }) {
             onChange={handleInputChange}
           />
         </div>
+        
          
         <div className="form-button">
           <button type="submit">Save</button>

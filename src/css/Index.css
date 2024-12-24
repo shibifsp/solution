@@ -26,9 +26,9 @@
 
 }
 .nav-bar h2 {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
-  color: #eeeeee;
+  color: #f2f0f0;
 }
 .bottom {
   padding: 10px; 
@@ -89,7 +89,7 @@ div.net-amount{
 }
 .net-amount .net-balance h2 {
   margin-left: 3px;
-  font-size: 17px;
+  font-size: 19px;
   color: #272727;
 } 
 .net-amount .balance p {

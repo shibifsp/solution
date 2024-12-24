@@ -14,7 +14,7 @@ button {
 }
 
 .calculation .container {  
-  background: #fff;
+  background: #ffffffe6;
   width: 70%;
   min-height: 90vh;
   border-radius: 5px;
@@ -29,21 +29,19 @@ button {
 }
 .calculation .nav-bar h1 {
   cursor: pointer;
-  color: #000;
+  color: #f2f0f0;
   text-decoration: none;
   display: inline-block;
 }
-.calculation .nav-bar .img-home-icon {
-  width: 50px;
-}
 .calculation .nav-bar img {
   cursor: pointer;
-  width: 100%;
+  width: 34px;
+  height: 34px;
 }
 
 .table-form {
   width: 90%;
-  margin: 10px 10px;
+  margin: 10px auto;
 }
 .table-form .table-head, .table-form .row {
   display: flex;
@@ -63,6 +61,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #ebebeb;
 }
 .table-form .table-head .info {
   width: 35%;
@@ -88,6 +87,9 @@ button {
 .table-form .middle .row .input {
   width: 35%;
   margin: 1px;
+}
+.table-form .middle .row .input input::placeholder {
+  font-size: 14px;
 }
 .table-form .middle .row .input input, .type-select input {
   width: 100%;
@@ -177,7 +179,7 @@ div.history {
 .history table thead th {
   position: sticky;
   top: 0;
-  background: #fff;
+  background: #ebebeb;
 }
 .history table th, .history table td {
   border: 1px solid #ddd;
@@ -185,9 +187,15 @@ div.history {
   padding: 8px 12px;
   padding-left: 20px;
   color: #000;
+  font-size: 16px;
+}
+.history table td.amount {
+  font-size: 18px;
 }
 .history table .td_type {
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #636262;
 }
 .history table .td-date {
   font-size: 12px;

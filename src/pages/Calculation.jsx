@@ -4,7 +4,7 @@ import supabase from "../Config/supabaseClient";
 import { useParams, Link } from "react-router-dom";
 import CustomAlert from "./CustomAlert";
 import moment from "moment";
-import HomeIcon from "../images/icons8-homepage-50.png";
+
 
 export default function Calculation() {
   const { id } = useParams();
@@ -138,6 +138,10 @@ export default function Calculation() {
   const deleteRow = (index) => {
     setDatas((prevDatas) => prevDatas.filter((_, i) => i !== index));
   };
+
+  const absoluteTotal = Math.abs(total);
+  const formatedTotal = absoluteTotal.toLocaleString("en-US");
+
   return (
     <div className="calculation">
       <div className="container">
@@ -147,7 +151,7 @@ export default function Calculation() {
           </Link>
           <div className="img-home-icon">
             <Link to={`/memberInfo/${id}`}>
-              <img src={HomeIcon} alt="Home-icon" title="Home" />
+            <img src="https://cdn-icons-png.flaticon.com/128/12225/12225935.png" loading="lazy" alt="Profile picture " title="Account info " />
             </Link>
           </div>
         </div>
@@ -173,6 +177,7 @@ export default function Calculation() {
                     <input
                       type="text"
                       id="info"
+                      placeholder="Enter info"
                       value={row.info}
                       onChange={(e) =>
                         handleChange(index, "info", e.target.value)
@@ -183,6 +188,7 @@ export default function Calculation() {
                     <input
                       type="numeric"
                       id="amount"
+                      placeholder="Enter amount"
                       value={row.amount}
                       onChange={(e) =>
                         handleChange(index, "amount", e.target.value)
@@ -227,21 +233,33 @@ export default function Calculation() {
 
           <div className="footer">
             <h2>Total balance</h2>
-            <h2 style={{ color: total > 0 ? "red" : "green" }}>
+            <h2
+              style={{ color: total > 0 ? "red" : "green", fontSize: "18px" }}
+            >
               {total < 0 ? (
                 <>
                   You will get
-                  <span style={{ color: "black", marginLeft: "10px" }}>
-                    {" "}
-                    {total}
+                  <span
+                    style={{
+                      color: "black",
+                      marginLeft: "10px",
+                      fontSize: "22px",
+                    }}
+                  >
+                    {formatedTotal}
                   </span>
                 </>
               ) : (
                 <>
                   You will give
-                  <span style={{ color: "black", marginLeft: "10px" }}>
-                    {" "}
-                    {total}
+                  <span
+                    style={{
+                      color: "black",
+                      marginLeft: "10px",
+                      fontSize: "22px",
+                    }}
+                  >
+                    {formatedTotal}
                   </span>
                 </>
               )}
@@ -269,13 +287,24 @@ export default function Calculation() {
             </thead>
             <tbody>
               {fetchDatas.map((fData, index) => {
+
                 const fetchedDate = fData.date;
                 const formattedDate = moment(fetchedDate).format("DD-MMM-yyyy");
+
+                const formatedAmount = fData.amount.toLocaleString('en-US')
+
                 return (
                   <tr key={index}>
                     <td className="td-date">{formattedDate}</td>
                     <td>{fData.info}</td>
-                    <td>{fData.amount}</td>
+                    <td
+                      className="amount"
+                      // style={{
+                      //   color: fData.type === "C" ? "#26923f" : "#d92638",
+                      // }}
+                    >
+                      {formatedAmount}
+                    </td>
                     <td className="td_type">
                       {fData.type === "D" ? "DEBIT" : "CREDIT"}
                     </td>

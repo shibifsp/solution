@@ -12,49 +12,50 @@ export default function Index() {
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState("");
   const [memberRemove, setMemberRemove] = useState(null);
-  const [totalDebit, setTotalDebit] = useState();
-  const [totalCredit, setTotalCredit] = useState();
+  const [totalDebit, setTotalDebit] = useState(0);
+  const [totalCredit, setTotalCredit] = useState(0);
   const [everyDebitBalance, setEveryDebitBalance] = useState([]);
   const [everyCreditBalance, setEveryCreditBalance] = useState();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchDealers = async () => {
-      setLoading(true);
-      const { data, error } = await supabase
-        .from("dealers")
-        .select("*, calculations(amount.sum(), type)");
-
-      if (error) {
-        console.error("Error fetching members", error);
-      } else {
-        setMembers(data);
-
-        let sumOfCredit = 0;
-        let sumOfDebit = 0;
-        members.forEach((member) => {
-          if (Array.isArray(member.calculations)) {
-            const eachTotal = member.calculations.reduce((total, item) => {
-              return item.type === "C" ? total + item.sum : total - item.sum;
-            }, 0);
-
-            if (eachTotal > 0) {
-              sumOfDebit += eachTotal;
-            } else if (eachTotal < 0) {
-              sumOfCredit += eachTotal;
-            }
-          }
-        });
-
-        setEveryCreditBalance(sumOfCredit);
-        setEveryDebitBalance(sumOfDebit);
-        setLoading(false);
-      }
-    };
-    fetchDealers();
     fetchTotalDebit();
-  }, [members]);
+    fetchDealers();
+  }, []);
+
+  const fetchDealers = async () => {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from("dealers")
+      .select("*, calculations(amount.sum(), type)");
+
+    if (error) {
+      console.error("Error fetching members", error);
+    } else {
+      setMembers(data);
+
+      let sumOfCredit = 0;
+      let sumOfDebit = 0;
+      data.forEach((member) => {
+        if (Array.isArray(member.calculations)) {
+          const eachTotal = member.calculations.reduce((total, item) => {
+            return item.type === "C" ? total + item.sum : total - item.sum;
+          }, 0);
+
+          if (eachTotal > 0) {
+            sumOfDebit += eachTotal;
+          } else if (eachTotal < 0) {
+            sumOfCredit += eachTotal;
+          }
+        }
+      });
+
+      setEveryCreditBalance(sumOfCredit);
+      setEveryDebitBalance(sumOfDebit);
+      setLoading(false);
+    };
+  };
 
   const fetchTotalDebit = async () => {
     const { data, error } = await supabase
@@ -88,10 +89,11 @@ export default function Index() {
       setMembers(members.filter((member) => member.id !== id));
       setMemberRemove(false);
       fetchTotalDebit();
+      await fetchDealers();
     }
   };
 
-  const netAmount = totalDebit - totalCredit;
+  const netAmount = (totalDebit || 0) - (totalCredit || 0);
   const absoluteNetAmount = Math.abs(netAmount);
   const formattedNetAmount = absoluteNetAmount.toLocaleString("en-US");
 
