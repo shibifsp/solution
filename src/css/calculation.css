@@ -163,6 +163,15 @@ div.footer {
 div.footer h2 {
   font-size: 22px;
 }
+div.total-consider {
+  display: flex;
+  align-items: center;
+}
+div.total-consider span {
+  font-size: 12px;
+  margin-right: 10px;
+  filter: opacity(0.6);
+}
 
 
 div.history {
@@ -189,11 +198,15 @@ div.history {
   color: #000;
   font-size: 16px;
 }
+.history table td.info {
+  font-size: 15px;
+}
 .history table td.amount {
   font-size: 18px;
+  font-weight: bold;
 }
 .history table .td_type {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: bold;
   color: #636262;
 }

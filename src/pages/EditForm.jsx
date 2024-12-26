@@ -2,7 +2,7 @@ import React,{ useState, useEffect } from 'react';
 import '../css/EditForm.css';
 import supabase from '../Config/supabaseClient';
 
-export default function EditForm({ onSave, id }) {
+export default function EditForm({ onSave, id, onUpdate }) {
 
   const [editingData, setEditingData] = useState([
     {
@@ -32,12 +32,15 @@ export default function EditForm({ onSave, id }) {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setEditingData(prevEditingData => ({
-      ...prevEditingData,
-      [name]: value
-    }))
+        ...prevEditingData,
+        [name]: value,
+     
+    }));
+
   }
 
-  const postEditedData = async () => {
+  const postEditedData = async (e) => {
+    e.preventDefault();
 
     const { data, error } = await supabase
       .from('dealers')
@@ -49,8 +52,9 @@ export default function EditForm({ onSave, id }) {
     } else {
       setEditingData({name:"", number:"", place:"", email:""});
       onSave();
+      onUpdate();
     }
-      
+    
   }
 
   console.log(editingData)

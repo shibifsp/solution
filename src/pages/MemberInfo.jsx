@@ -7,7 +7,6 @@ import EditForm from "./EditForm";
 import { Link } from "react-router-dom";
 
 export default function MemberInfo() {
-  
   const { id } = useParams();
   const [dataDefined, setDataDefined] = useState([]);
   const [about, setAbout] = useState();
@@ -31,26 +30,27 @@ export default function MemberInfo() {
   }, [id]);
 
   useEffect(() => {
-    const fetchDealerTable = async () => {
-      const { data, error } = await supabase
-        .from("dealers")
-        .select("*")
-        .eq("id", id);
-
-      if (error) {
-        console.error("Your fetcing name is incorrect!..");
-      } else {
-        setAbout(
-          data && data.length > 0 ? (
-            data[0]
-          ) : (
-            <h2>The about array is empty...</h2>
-          )
-        );
-      }
-    };
     fetchDealerTable();
   }, [id]);
+
+  const fetchDealerTable = async () => {
+    const { data, error } = await supabase
+      .from("dealers")
+      .select("*")
+      .eq("id", id);
+
+    if (error) {
+      console.error("Your fetcing name is incorrect!..");
+    } else {
+      setAbout(
+        data && data.length > 0 ? (
+          data[0]
+        ) : (
+          <h2>The about array is empty...</h2>
+        )
+      );
+    }
+  };
 
   useEffect(() => {
     const personalSum = () => {
@@ -76,7 +76,7 @@ export default function MemberInfo() {
   };
 
   const absolutePersonalTotal = Math.abs(personalTotal);
-  const formatedPersonalTotal = absolutePersonalTotal.toLocaleString('en-US')
+  const formatedPersonalTotal = absolutePersonalTotal.toLocaleString("en-US");
 
   return (
     <div className="memberInfo">
@@ -102,7 +102,7 @@ export default function MemberInfo() {
                 const takedDate = item.date;
                 const formattedDate = moment(takedDate).format("DD-MMM-YYYY");
 
-                const formatedAmount = item.amount.toLocaleString('en-US')
+                const formatedAmount = item.amount.toLocaleString("en-US");
 
                 return (
                   <tr key={item.id}>
@@ -191,7 +191,11 @@ export default function MemberInfo() {
 
         {showForm && (
           <div className="editing">
-            <EditForm onSave={() => setShowForm(false)} id={id} />
+            <EditForm 
+              onSave = {() => setShowForm(false)}
+              onUpdate = {fetchDealerTable}
+              id = {id} 
+            />
           </div>
         )}
       </div>

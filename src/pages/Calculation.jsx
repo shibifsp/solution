@@ -5,7 +5,6 @@ import { useParams, Link } from "react-router-dom";
 import CustomAlert from "./CustomAlert";
 import moment from "moment";
 
-
 export default function Calculation() {
   const { id } = useParams();
 
@@ -60,14 +59,31 @@ export default function Calculation() {
     const updatedData = [...datas];
     updatedData[index][field] = value;
     setDatas(updatedData);
+
+    if (error) {
+      setError(null);
+    }
   };
 
   const postData = async (e) => {
     e.preventDefault();
 
+    const hasIncompleteRow = datas.some(
+      (row) =>
+        (row.info || row.amount || row.type) &&
+        (!row.info || !row.amount || !row.type)
+    );
+
+    if (hasIncompleteRow) {
+      setError("Please complete the row you started.");
+      return;
+    }
+
     const validRows = datas.filter((row) => row.info && row.amount && row.type);
+
     if (validRows.length === 0) {
-      setError("Please fill atleast one row..");
+      setError("Please fill in at least one complete row before submitting.");
+      return;
     }
 
     const { data, error } = await supabase
@@ -78,9 +94,8 @@ export default function Calculation() {
       setError(null);
       setDatas([{ info: "", amount: "", type: "", coustomer_id: id }]);
       fetchData();
-      console.log(validRows);
     } else {
-      setError("please fill all in correctly..");
+      console.log(Error);
     }
   };
 
@@ -116,19 +131,9 @@ export default function Calculation() {
     }
   };
 
-  const clearData = async () => {
-    const { data, error } = await supabase
-      .from("calculations")
-      .delete()
-      .eq("coustomer_id", id);
-
-    if (!error) {
-      setFetchDatas([]);
-      setTotal(0);
-      setShowAlert(false);
-    } else {
-      console.error("Error clearing data", error);
-    }
+  const clearEnteries = () => {
+    setDatas([{ info: "", amount: "", type: "", coustomer_id: "id" }]);
+    setShowAlert(false);
   };
 
   const addRow = () => {
@@ -151,12 +156,20 @@ export default function Calculation() {
           </Link>
           <div className="img-home-icon">
             <Link to={`/memberInfo/${id}`}>
-            <img src="https://cdn-icons-png.flaticon.com/128/12225/12225935.png" loading="lazy" alt="Profile picture " title="Account info " />
+              <img
+                src="https://cdn-icons-png.flaticon.com/128/12225/12225935.png"
+                loading="lazy"
+                alt="Profile picture "
+                title="Account info "
+              />
             </Link>
           </div>
         </div>
 
         <div className="table-form">
+          <div className="error-message">
+            {error && <p style={{ color: "red" }}>{error}</p>}
+          </div>
           <form onSubmit={postData}>
             <div className="table-head">
               <label htmlFor="info" className="info">
@@ -213,6 +226,7 @@ export default function Calculation() {
                     <button type="button" className="add" onClick={addRow}>
                       Add
                     </button>
+
                     <button
                       type="button"
                       className="delete"
@@ -227,41 +241,27 @@ export default function Calculation() {
 
             <div className="button">
               <button type="submit">Submit</button>
-              <button onClick={clearData}>clear</button>
+              <button type="button" onClick={() => setShowAlert(true)}>
+                clear
+              </button>
             </div>
           </form>
 
           <div className="footer">
             <h2>Total balance</h2>
             <h2
-              style={{ color: total > 0 ? "red" : "green", fontSize: "18px" }}
+              style={{ color: total > 0 ? "red" : "green" }}
             >
               {total < 0 ? (
-                <>
-                  You will get
-                  <span
-                    style={{
-                      color: "black",
-                      marginLeft: "10px",
-                      fontSize: "22px",
-                    }}
-                  >
-                    {formatedTotal}
-                  </span>
-                </>
+                <div className="total-consider">
+                  <span style={{ color: "#636262"}}>You wil Get</span>
+                  {formatedTotal}
+                </div>
               ) : (
-                <>
-                  You will give
-                  <span
-                    style={{
-                      color: "black",
-                      marginLeft: "10px",
-                      fontSize: "22px",
-                    }}
-                  >
-                    {formatedTotal}
-                  </span>
-                </>
+                <div className="total-consider">
+                  <span style={{ color: "#636262" }}>You wil Give</span>
+                  {formatedTotal}
+                </div>
               )}
             </h2>
           </div>
@@ -269,8 +269,8 @@ export default function Calculation() {
 
         {showAlert && (
           <CustomAlert
-            message="Your total balance is 0. Would you like clear the history?"
-            onSure={clearData}
+            message="Are you ready for to clean your entries ?"
+            onSure={clearEnteries}
             onCancel={() => setShowAlert(false)}
           />
         )}
@@ -287,11 +287,10 @@ export default function Calculation() {
             </thead>
             <tbody>
               {fetchDatas.map((fData, index) => {
-
                 const fetchedDate = fData.date;
                 const formattedDate = moment(fetchedDate).format("DD-MMM-yyyy");
 
-                const formatedAmount = fData.amount.toLocaleString('en-US')
+                const formatedAmount = fData.amount.toLocaleString("en-US");
 
                 return (
                   <tr key={index}>
@@ -299,9 +298,9 @@ export default function Calculation() {
                     <td>{fData.info}</td>
                     <td
                       className="amount"
-                      // style={{
-                      //   color: fData.type === "C" ? "#26923f" : "#d92638",
-                      // }}
+                      style={{
+                        color: fData.type === "C" ? "#26923f" : "#d92638",
+                      }}
                     >
                       {formatedAmount}
                     </td>
