@@ -54,7 +54,7 @@ export default function Index() {
       setEveryCreditBalance(sumOfCredit);
       setEveryDebitBalance(sumOfDebit);
       setLoading(false);
-    };
+    }
   };
 
   const fetchTotalDebit = async () => {
@@ -113,7 +113,7 @@ export default function Index() {
         <div className="bottom">
           <div className="net-amount">
             <div className="balance">
-              <p>You will get:</p>
+              <p>You will Get:</p>
               <h3 style={{ color: "green" }}>{formatedCreditBalance}</h3>
             </div>
 
@@ -179,29 +179,31 @@ export default function Index() {
                   return (
                     <div key={i} className="member-row">
                       <div className="content-members">
-                        <li
-                          onClick={() => {
-                            navigate(`/calculation/${member.id}`);
-                          }}
-                        >
-                          {member.name}
-                        </li>
                         <div className="date">
-                          <p
-                            className="current-total"
-                            style={{
-                              color:
-                                everySum < 0
-                                  ? "green"
-                                  : everySum > 0
-                                  ? "red"
-                                  : "black",
+                          <li
+                            onClick={() => {
+                              navigate(`/calculation/${member.id}`);
                             }}
                           >
-                            {formattedEverySum}
-                          </p>
+                            {member.name}
+                          </li>
                           <p className="current-date">{formattedTakedDate}</p>
                         </div>
+
+                        <p
+                          className="current-total"
+                          style={{
+                            color:
+                              everySum < 0
+                                ? "green"
+                                : everySum > 0
+                                ? "red"
+                                : "black",
+                          }}
+                        >
+                          {formattedEverySum}
+                        </p>
+
                         <div
                           className="img-delete"
                           onClick={() => setMemberRemove(member.id)}

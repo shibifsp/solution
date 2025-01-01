@@ -15,7 +15,7 @@
 
 .container {
   background: #fff;
-  width: 60%;
+  width: 80%;
   min-height: 90vh;
   border-radius: 5px;
   overflow: hidden;
@@ -39,8 +39,7 @@
   display: flex;
   align-items: center;
   margin: 10px auto;
-  border: 1px solid #ddd;
-  background: #fff;
+  border: 1px solid #d8d8d8;
   border-radius: 5px;
   transition: border-color 0.3s ease;
 }
@@ -76,11 +75,21 @@ div.net-amount{
   padding: 0px 30px;
   margin: 10px 0 18px 0;
 }
+div.net-amount .balance,
+div.net-amount .net-balance {
+  flex: 1 1 30%; 
+  text-align: center;
+}
 
 .net-balance p {
   font-size: 16px;
   font-weight: bold;
   color: #272727;
+}
+div.current-amount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .net-balance .current-amount p {
   font-size: 12px;
@@ -93,19 +102,16 @@ div.net-amount{
   color: #272727;
 } 
 .net-amount .balance p {
-  font-size: 14px;font-weight: bold;
-  color: #272727;
+  font-size: 14px;
+  font-weight: bold;
+  color: #3d3b3b;
 }
 .net-amount .balance h3 {
   font-size: 14px;
 }
-div.current-amount {
-  display: flex;
-  align-items: center;
-}
 
 .members{
-  height: 62vh;
+  height: 60vh;
   overflow-y: auto;
   scrollbar-width: thin;
   padding: 0px 30px;
@@ -125,7 +131,7 @@ div.current-amount {
 }
 .members .member-row {
   border-bottom: 1px solid #ddd;
-  padding: 1px 10px;
+  padding: 5px;
 }
 .member-row .content-members {
   display: flex;
@@ -140,7 +146,6 @@ div.date {
   display: flex;
   flex-direction: column;
   flex: 1;
-  text-align: center;
   background: #fff;
   border-radius: 2px;
   padding: 2px;
@@ -149,6 +154,7 @@ div.date {
 div.date .current-date {
   font-size: 11px;
   color: #353434;
+  margin-top: 3px;
 }
 div.date .current-total {
   color: #524f4f;
@@ -160,6 +166,7 @@ div.date .current-total {
   height: 19px;
   cursor: pointer;
   filter: opacity(0.5);
+  margin-left: 8px;
 }
 .members .member-row .img-delete img:hover{
   filter: opacity(1);
@@ -177,5 +184,117 @@ div.date .current-total {
   font-weight: 900;
   width: 40%;
   text-align: center;
+}
+
+
+@media ( min-width: 1536px ) {}
+
+@media (min-width: 1280px ) {}
+
+@media ( min-width: 1024px ) {
+
+}
+
+@media ( max-width: 768px ) {
+  .container {
+    width: 90%;
+  }
+ 
+}
+
+@media ( max-width: 640px ) {
+  div.index {
+    padding: 20px 0;
+  }
+  div.net-amount {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    padding: 10px;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+  }
+  div.net-amount .balance {
+    min-width: 40%;
+  }
+  div.net-amount .net-balance {
+    order: 1;
+    min-width: 100%;
+  }
+  div.net-amount .balance:first-of-type {
+    order: 2;
+  }
+  div.net-amount .balance:last-of-type {
+    order: 3;
+  }
+}
+
+@media ( max-width: 475px ) {
+  div.index {
+    height: 100vh;
+    padding: 0;
+  }
+  div.index .nav-bar {
+    padding: 16px;
+  }
+  div.net-amount {
+    padding: 0;
+  }
+  div.net-amount .balance p {
+    font-size: 12px;
+  }
+
+  div.search {
+    width: 98%;
+    margin-top: 12px;
+  }
+  div.members {
+    padding: 0px 10px;
+    height: 40vh;
+    margin-bottom: 12px;
+  }
+  .members div.blur {
+    height: 10px;
+  }
+  div.members ul li {
+    font-size: 14px;
+  }
+  div.members .date .current-total{
+    font-size: 16px;
+  }
+  div.members .date .current-date{
+    font-size: 10px;
+  }
+  .members .member-row .img-delete img {
+    width: 16px;
+    height: 16px;
+  }
+  .add-member {
+    width: 50%;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 280px) {
+  div.index {
+    padding: 10px 0;
+  }
+  div.net-amount {
+    flex-direction: column;
+    margin: 0;
+  }
+  div.net-amount .balance {
+    display: flex;
+    gap: 10px;
+  }
+  div.net-amount .balance p {
+    font-size: 12px;
+  }
+
+
+  div.members {
+    padding: 0px 2px;
+  }
 }
 
