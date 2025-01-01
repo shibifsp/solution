@@ -189,20 +189,21 @@ export default function Index() {
                           </li>
                           <p className="current-date">{formattedTakedDate}</p>
                         </div>
-
-                        <p
-                          className="current-total"
-                          style={{
-                            color:
-                              everySum < 0
-                                ? "green"
-                                : everySum > 0
-                                ? "red"
-                                : "black",
-                          }}
-                        >
-                          {formattedEverySum}
-                        </p>
+                        <div className="row-total">
+                          <p
+                            className="current-total"
+                            style={{
+                              color:
+                                everySum < 0
+                                  ? "green"
+                                  : everySum > 0
+                                  ? "red"
+                                  : "black",
+                            }}
+                          >
+                            {formattedEverySum}
+                          </p>
+                        </div>
 
                         <div
                           className="img-delete"
