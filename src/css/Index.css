@@ -234,8 +234,8 @@ div.row-total {
 
 @media ( max-width: 475px ) {
   div.index {
-    height: 100vh;
-    padding: 0;
+    min-height: 100%;
+    padding: 10px;
   }
   div.index .nav-bar {
     padding: 16px;
@@ -253,7 +253,7 @@ div.row-total {
   }
   div.members {
     padding: 0px 10px;
-    height: 40vh;
+    height: 41vh;
     margin-bottom: 12px;
   }
   .members div.blur {
