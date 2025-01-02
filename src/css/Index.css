@@ -15,7 +15,7 @@
 
 .container {
   background: #fff;
-  width: 80%;
+  width: 70%;
   border-radius: 5px;
   overflow: hidden;
 }
@@ -183,7 +183,7 @@ div.row-total {
   display: block;
   text-decoration:none;
   font-weight: 900;
-  width: 40%;
+  width: 30%;
   text-align: center;
 }
 
@@ -192,8 +192,10 @@ div.row-total {
 
 @media (min-width: 1280px ) {}
 
-@media ( min-width: 1024px ) {
-
+@media ( max-width: 1024px ) {
+  .container {
+    width: 90%;
+  }
 }
 
 @media ( max-width: 768px ) {
@@ -236,6 +238,9 @@ div.row-total {
     max-height: 100%;
     padding: 10px;
   }
+  .container {
+    width: 100%;
+  }
   div.index .nav-bar {
     padding: 16px;
   }
@@ -252,8 +257,9 @@ div.row-total {
   }
   div.members {
     padding: 0px 10px;
-    height: 70vh;
+    min-height: 390px;
     margin-bottom: 12px;
+    max-height: 100%;
   }
   .members div.blur {
     height: 10px;

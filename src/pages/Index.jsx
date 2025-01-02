@@ -172,9 +172,12 @@ export default function Index() {
                   const formattedEverySum =
                     absoluteEverySum.toLocaleString("en-US");
 
-                  const takedDate = member.date;
+
+
+                  const takedDate = members.map(member => new Date(member.date));
+                  const latestDate = new Date(Math.max(...takedDate));
                   const formattedTakedDate =
-                    moment(takedDate).format("DD-MM-YYYY");
+                    moment(latestDate).format("DD-MM-YYYY");
 
                   return (
                     <div key={i} className="member-row">
