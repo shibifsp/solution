@@ -235,7 +235,7 @@ div.row-total {
 
 @media ( max-width: 475px ) {
   div.index {
-    max-height: 100%;
+    max-height: 100vh;
     padding: 10px;
   }
   .container {
@@ -260,7 +260,7 @@ div.row-total {
     min-height: 55vh;
     height: 55vh;
     margin-bottom: 12px;
-    max-height: 100%;
+    max-height: 100vh;
   }
   .members div.blur {
     height: 10px;
