@@ -257,8 +257,8 @@ div.row-total {
   }
   div.members {
     padding: 0px 10px;
-    min-height: 364px;
-    height: 52px;
+    min-height: 55vh;
+    height: 55vh;
     margin-bottom: 12px;
     max-height: 100%;
   }
