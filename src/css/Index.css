@@ -253,11 +253,12 @@ div.row-total {
 
   div.search {
     width: 98%;
-    margin-top: 12px;
+    margin-top: 22px;
   }
   div.members {
     padding: 0px 10px;
-    min-height: 390px;
+    min-height: 364px;
+    height: 52px;
     margin-bottom: 12px;
     max-height: 100%;
   }
