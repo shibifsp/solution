@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
 }
 
 .container {
@@ -233,7 +233,7 @@ div.row-total {
   }
 }
 
-@media ( max-width: 475px ) {
+@media ( max-width: 480px ) {
   div.index {
     padding: 10px;
   }
@@ -256,8 +256,7 @@ div.row-total {
   }
   div.members {
     padding: 0px 10px;
-    min-height: 55vh;
-    height: 39vh;
+    height: calc(100vh - 300px);
     margin-bottom: 12px;
     max-height: 80vh;
   }
