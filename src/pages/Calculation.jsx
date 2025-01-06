@@ -171,13 +171,16 @@ export default function Calculation() {
             <h1>{name}</h1>
           </Link>
           <div className="img-home-icon">
+
             <Link to={`/memberInfo/${id}`}>
-              <img
+            <img src="https://cdn-icons-png.flaticon.com/512/1027/1027119.png" alt="List" title="List"/>
+      
+              {/* <img
                 src="https://cdn-icons-png.flaticon.com/128/12225/12225935.png"
                 loading="lazy"
                 alt="Profile picture "
                 title="Account info "
-              />
+              /> */}
             </Link>
           </div>
         </div>
