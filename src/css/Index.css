@@ -193,21 +193,40 @@ div.row-total {
 @media (min-width: 1280px ) {}
 
 @media ( max-width: 1024px ) {
+  .index {
+    padding: 10px;
+  }
   .container {
-    width: 90%;
+    width: 100%;
+  }
+  .members {
+    height: calc(100vh - 275px)
+  }
+  .calculation {
+    padding: 10px;
+    width: 100%;
+  }
+  .calculation .container {
+    width: 100%;
+    margin: 0;
   }
 }
 
 @media ( max-width: 768px ) {
-  .container {
-    width: 90%;
+  .index {
+    padding: 10px;
   }
- 
+  .container {
+    width: 100%;
+  }
+  .members {
+    height: calc(100vh - 275px)
+  }
 }
 
 @media ( max-width: 640px ) {
   div.index {
-    padding: 20px 0;
+    padding: 10px;
   }
   div.net-amount {
     flex-direction: row;
@@ -230,6 +249,12 @@ div.row-total {
   }
   div.net-amount .balance:last-of-type {
     order: 3;
+  }
+  .members {
+    height: calc(100vh - 316px)
+  }
+  .add-member {
+    width: 40%;
   }
 }
 
@@ -258,7 +283,6 @@ div.row-total {
     padding: 0px 10px;
     height: calc(100vh - 300px);
     margin-bottom: 12px;
-    max-height: 80vh;
   }
   .members div.blur {
     height: 10px;

@@ -4,6 +4,7 @@ import supabase from "../Config/supabaseClient";
 import { useParams, Link } from "react-router-dom";
 import CustomAlert from "./CustomAlert";
 import moment from "moment";
+import { use } from "react";
 
 export default function Calculation() {
   const { id } = useParams();
@@ -12,6 +13,18 @@ export default function Calculation() {
   const [fetchDatas, setFetchDatas] = useState([]);
   const [total, setTotal] = useState(0);
   const [name, setName] = useState();
+  const [width, setWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const [datas, setDatas] = useState([
     {
       info: "",
@@ -166,106 +179,203 @@ export default function Calculation() {
           </div>
         </div>
 
-        <div className="table-form">
-          <div className="error-message">
-            {error && <p style={{ color: "red" }}>{error}</p>}
+        {width > 480 ? (
+          <div className="table-form">
+            <div className="error-message">
+              {error && <p style={{ color: "red" }}>{error}</p>}
+            </div>
+            <form onSubmit={postData}>
+              <div className="table-head">
+                <label htmlFor="info" className="info">
+                  <h2>Info</h2>
+                </label>
+                <label htmlFor="amount" className="info">
+                  <h2>Amount</h2>
+                </label>
+                <label htmlfor="type" className="type">
+                  <h2>Type</h2>
+                </label>
+              </div>
+
+              <div className="middle">
+                {datas.map((row, index) => (
+                  <div className="row" key={index}>
+                    <div className="input">
+                      <input
+                        type="text"
+                        id="info"
+                        placeholder="Enter info"
+                        value={row.info}
+                        onChange={(e) =>
+                          handleChange(index, "info", e.target.value)
+                        }
+                      />
+                    </div>
+                    <div className="input">
+                      <input
+                        type="numeric"
+                        id="amount"
+                        placeholder="Enter amount"
+                        value={row.amount}
+                        onChange={(e) =>
+                          handleChange(index, "amount", e.target.value)
+                        }
+                      />
+                      {row.amount && !/^\d*$/.test(row.amount) && (
+                        <div className="error">Please enter a valid number</div>
+                      )}
+                    </div>
+                    <div className="type-select">
+                      <input
+                        type="text"
+                        id="type"
+                        placeholder="D/C"
+                        value={row.type}
+                        onChange={(e) =>
+                          handleChange(index, "type", e.target.value)
+                        }
+                      />
+                    </div>
+                    <div className="btn-out">
+                      <button type="button" className="add" onClick={addRow}>
+                        Add
+                      </button>
+
+                      <button
+                        type="button"
+                        className="delete"
+                        onClick={() => deleteRow(index)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="button">
+                <button type="submit">Submit</button>
+                <button type="button" onClick={() => setShowAlert(true)}>
+                  clear
+                </button>
+              </div>
+            </form>
+
+            <div className="footer">
+              <h2>Total balance</h2>
+              <h2 style={{ color: total > 0 ? "red" : "green" }}>
+                {total < 0 ? (
+                  <div className="total-consider">
+                    <span style={{ color: "#636262" }}>You wil Get</span>
+                    {formatedTotal}
+                  </div>
+                ) : (
+                  <div className="total-consider">
+                    <span style={{ color: "#636262" }}>You wil Give</span>
+                    {formatedTotal}
+                  </div>
+                )}
+              </h2>
+            </div>
           </div>
-          <form onSubmit={postData}>
-            <div className="table-head">
-              <label htmlFor="info" className="info">
-                <h2>Info</h2>
-              </label>
-              <label htmlFor="amount" className="info">
-                <h2>Amount</h2>
-              </label>
-              <label htmlfor="type" className="type">
-                <h2>Type</h2>
-              </label>
+        ) : (
+          <div className="colum-form">
+            <div className="footer">
+              <h2>Total balance</h2>
+              <h2
+                style={{ color: total > 0 ? "red" : "green", fontWeight: "bold" }}
+                className="total-digit"
+              >
+                {total < 0 ? (
+                  <div className="total-consider">
+                    <span style={{ color: "#636262" }}>You wil Get</span>
+                    {formatedTotal}
+                  </div>
+                ) : (
+                  <div className="total-consider">
+                    <span style={{ color: "#636262" }}>You wil Give</span>
+                    {formatedTotal}
+                  </div>
+                )}
+              </h2>
             </div>
 
-            <div className="middle">
-              {datas.map((row, index) => (
-                <div className="row" key={index}>
-                  <div className="input">
-                    <input
-                      type="text"
-                      id="info"
-                      placeholder="Enter info"
-                      value={row.info}
-                      onChange={(e) =>
-                        handleChange(index, "info", e.target.value)
-                      }
-                    />
-                  </div>
-                  <div className="input">
-                    <input
-                      type="numeric"
-                      id="amount"
-                      placeholder="Enter amount"
-                      value={row.amount}
-                      onChange={(e) =>
-                        handleChange(index, "amount", e.target.value)
-                      }
-                    />
-                    {row.amount && !/^\d*$/.test(row.amount) && (
-                      <div className="error">Please enter a valid number</div>
-                    )}
-                  </div>
-                  <div className="type-select">
-                    <input
-                      type="text"
-                      id="type"
-                      placeholder="D/C"
-                      value={row.type}
-                      onChange={(e) =>
-                        handleChange(index, "type", e.target.value)
-                      }
-                    />
-                  </div>
-                  <div className="btn-out">
-                    <button type="button" className="add" onClick={addRow}>
-                      Add
-                    </button>
-
-                    <button
-                      type="button"
-                      className="delete"
-                      onClick={() => deleteRow(index)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              ))}
+            <div className="error-message">
+              {error && <p style={{ color: "red" }}>{error}</p>}
             </div>
 
-            <div className="button">
-              <button type="submit">Submit</button>
-              <button type="button" onClick={() => setShowAlert(true)}>
-                clear
-              </button>
-            </div>
-          </form>
+            <form onSubmit={postData}>
+              <div className="parent-rows">
+                {datas.map((row, index) => (
+                  <div className="category-row">
+                    <div className="type-select">
+                      <input
+                        type="text"
+                        id="type"
+                        placeholder="D/C"
+                        value={row.type}
+                        onChange={(e) =>
+                          handleChange(index, "type", e.target.value)
+                        }
+                      />
+                    </div>
 
-          <div className="footer">
-            <h2>Total balance</h2>
-            <h2
-              style={{ color: total > 0 ? "red" : "green" }}
-            >
-              {total < 0 ? (
-                <div className="total-consider">
-                  <span style={{ color: "#636262"}}>You wil Get</span>
-                  {formatedTotal}
-                </div>
-              ) : (
-                <div className="total-consider">
-                  <span style={{ color: "#636262" }}>You wil Give</span>
-                  {formatedTotal}
-                </div>
-              )}
-            </h2>
+                    <div className="input">
+                      <input
+                        type="numeric"
+                        id="amount"
+                        placeholder="Enter amount"
+                        value={row.amount}
+                        onChange={(e) =>
+                          handleChange(index, "amount", e.target.value)
+                        }
+                        style={{color: total > 0 ? "#d92638" : "#26923f"}}
+                      />
+                      {row.amount && !/^\d*$/.test(row.amount) && (
+                        <div className="error">Please enter a valid number</div>
+                      )}
+                    </div>
+                    <div className="input">
+                      <input
+                        type="text"
+                        id="info"
+                        placeholder="Enter details"
+                        value={row.info}
+                        onChange={(e) =>
+                          handleChange(index, "info", e.target.value)
+                        }
+                      />
+                    </div>
+
+                    <div className="btn-out">
+                      <button 
+                        type="button" className="add" onClick=
+                        {addRow}
+                      >
+                        Add row
+                      </button>
+                      <button
+                        type="button"
+                        className="delete"
+                        onClick={() => deleteRow(index)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="button">
+                <button type="submit">Submit</button>
+                <button type="button" className="clr" onClick={() => setShowAlert(true)}>
+                  clear
+                </button>
+              </div>
+
+            </form>
           </div>
-        </div>
+        )}
 
         {showAlert && (
           <CustomAlert
@@ -275,56 +385,8 @@ export default function Calculation() {
           />
         )}
 
-        <div className="history">
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Info</th>
-                <th>Amount</th>
-                <th>Type</th>
-              </tr>
-            </thead>
-            <tbody>
-              {fetchDatas.map((fData, index) => {
-                const fetchedDate = fData.date;
-                const formattedDate = moment(fetchedDate).format("DD-MMM-yyyy");
-
-                const formatedAmount = fData.amount.toLocaleString("en-US");
-
-                return (
-                  <tr key={index}>
-                    <td className="td-date">{formattedDate}</td>
-                    <td>{fData.info}</td>
-                    <td
-                      className="amount"
-                      style={{
-                        color: fData.type === "C" ? "#26923f" : "#d92638",
-                      }}
-                    >
-                      {formatedAmount}
-                    </td>
-                    <td className="td_type">
-                      {fData.type === "D" ? "DEBIT" : "CREDIT"}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
       </div>
-
-      <div className="home-icon">
-        <Link to={`/`}>
-          <img
-            src="https://cdn-icons-png.flaticon.com/128/9449/9449216.png"
-            alt="Home"
-            title="Home"
-            class="lzy lazyload--done"
-          />
-        </Link>
-      </div>
+      
     </div>
   );
 }

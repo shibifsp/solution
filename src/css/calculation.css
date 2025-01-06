@@ -227,3 +227,110 @@ div.home-icon img {
   height: 38px;
   cursor: pointer;
 }
+
+
+
+@media ( max-width: 1024px) {
+
+}
+@media ( max-width: 768px) {
+
+}
+@media ( max-width: 640px) {
+  div.calculation {
+    width: 100%;
+    padding: 10px;
+  }
+  div.calculation .container {
+    width: 100%;
+    height: calc(100vh - 20px);
+  }
+}
+@media ( max-width: 480px) {
+  .colum-form {
+    padding: 10px;
+  }
+  .calculation .container {
+    background: #e0e2eb;
+  }
+
+  .calculation .nav-bar {
+    padding: 16px;
+  }
+  .calculation .nav-bar h1 {
+    font-size: 21px;
+  }
+  .calculation .nav-bar img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .footer {
+    margin: 10px 0;
+    background: #fff;
+  }
+  .colum-form .footer h2 {
+    font-size: 16px;
+  }
+  .colum-form .footer h2.total-digit {
+    font-size: 18px;
+  }
+
+  .parent-rows {
+    height: calc(100vh - 210px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+  div.category-row {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #b5bbceb8;
+  }
+  .type-select {
+    width: 50%;
+    margin-bottom: 5px;
+  }
+  .type-select input {
+    
+  }
+  .category-row .input {
+    margin-bottom: 5px;
+    width: 100%;
+  }
+  .category-row .input input {
+    width: 100%;
+    padding: 12px 12px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 14px;
+  }
+  .category-row .input #amount {
+    font-weight: bold;
+  }
+  .category-row .btn-out button {
+    padding: 8px 9px;
+    font-size: 12px;
+    font-weight: bold;
+    border: none;
+    margin-top: 5px;
+  }
+  .category-row .btn-out button.add {
+    background:#26923f;
+    color: #dcd2d2;
+  }
+  .category-row .btn-out button.delete {
+    background:#d92638;
+    color: #dcd2d2;
+  }
+
+  form .button button {
+    background: #0B2F9F;
+    color: #fdfdff;
+  }
+  form .button .clr {
+    margin-right: 10px;
+  }
+}
