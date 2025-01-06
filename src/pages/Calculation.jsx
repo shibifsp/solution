@@ -13,6 +13,7 @@ export default function Calculation() {
   const [fetchDatas, setFetchDatas] = useState([]);
   const [total, setTotal] = useState(0);
   const [name, setName] = useState();
+
   const [width, setWidth] = useState(window.innerWidth);
   useEffect(() => {
     const handleResize = () => {
@@ -25,14 +26,16 @@ export default function Calculation() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
   const [datas, setDatas] = useState([
     {
       info: "",
       amount: "",
-      type: "",
+      type: width <= 480 ? "C" : "",
       coustomer_id: id,
     },
   ]);
+
   const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
@@ -150,7 +153,7 @@ export default function Calculation() {
   };
 
   const addRow = () => {
-    setDatas([...datas, { info: "", amount: "", type: "", coustomer_id: id }]);
+    setDatas([...datas, { info: "", amount: "", type: width <= 480 ? "C": "", coustomer_id: id }]);
   };
 
   const deleteRow = (index) => {
@@ -308,16 +311,18 @@ export default function Calculation() {
               <div className="parent-rows">
                 {datas.map((row, index) => (
                   <div className="category-row">
+
                     <div className="type-select">
-                      <input
-                        type="text"
+                      <select 
+                        name="type" 
                         id="type"
-                        placeholder="D/C"
                         value={row.type}
-                        onChange={(e) =>
-                          handleChange(index, "type", e.target.value)
-                        }
-                      />
+                        onChange={(e) => handleChange(index, "type", e.target.value)}
+                        style={{color: row.type === "C" ? "green" : "red"}}
+                      >
+                        <option value="C">Credit</option>
+                        <option value="D">Debit</option>
+                      </select>
                     </div>
 
                     <div className="input">
@@ -329,7 +334,7 @@ export default function Calculation() {
                         onChange={(e) =>
                           handleChange(index, "amount", e.target.value)
                         }
-                        style={{color: total > 0 ? "#d92638" : "#26923f"}}
+                        style={{color: row.type === "D" ? "#d92638" : "#26923f"}}
                       />
                       {row.amount && !/^\d*$/.test(row.amount) && (
                         <div className="error">Please enter a valid number</div>
@@ -386,7 +391,7 @@ export default function Calculation() {
         )}
 
       </div>
-      
+
     </div>
   );
 }

@@ -289,13 +289,16 @@ div.home-icon img {
     margin-bottom: 10px;
     background: #b5bbceb8;
   }
+  
   .type-select {
     width: 50%;
     margin-bottom: 5px;
+    text-align: center;
   }
-  .type-select input {
-    
+  .type-select select {
+    padding: 5px;
   }
+
   .category-row .input {
     margin-bottom: 5px;
     width: 100%;
@@ -309,6 +312,10 @@ div.home-icon img {
   }
   .category-row .input #amount {
     font-weight: bold;
+    font-size: 16px;
+  }
+  .category-row .input #amount::placeholder {
+    font-weight: normal;
   }
   .category-row .btn-out button {
     padding: 8px 9px;
