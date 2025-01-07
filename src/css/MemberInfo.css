@@ -196,3 +196,53 @@ div.icons {
   filter: none;
 }
 
+@media ( max-width: 480px ) {
+  div.memberInfo {
+    padding: 10px;
+    flex-direction: column;
+  }
+
+  div.memberInfo .nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  div.memberInfo div.logos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  div.memberInfo div.logos img {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+  }
+  div.memberInfo div.logos img.fst-img {
+    width: 26px;
+  }
+
+  .memberInfo .container-details {
+    width: 100%;
+    height: calc(100vh - 19px);
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  .memberInfo .container-about {
+    width: 100%;
+    height: calc(100vh - 20px);
+    margin: 0;
+  }
+  div.content-memberInfo {
+    height: calc(100vh - 132px);
+  }
+  .container-details .footer {
+    width: 94%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+  }
+
+  div.memberInfo div.icons {
+    display: none;
+  }
+}
+

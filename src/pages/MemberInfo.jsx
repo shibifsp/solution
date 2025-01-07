@@ -43,11 +43,7 @@ export default function MemberInfo() {
       console.error("Your fetcing name is incorrect!..");
     } else {
       setAbout(
-        data && data.length > 0 ? (
-          data[0]
-        ) : (
-          <h2>The about array is empty...</h2>
-        )
+        data && data.length > 0 ? data[0] : <h2>The about array is empty...</h2>
       );
     }
   };
@@ -85,6 +81,27 @@ export default function MemberInfo() {
           <h1 style={{ color: personalTotal > 0 ? "#fd5b5b" : "#00f900" }}>
             {personalTotal > 0 ? "For will Give" : "For will Get"}
           </h1>
+          <div className="logos">
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/3220/3220642.png"
+              loading="lazy"
+              alt="Shopping list "
+              title="Shopping list "
+              className="fst-img"
+            />
+            <img
+              src="   https://cdn-icons-png.flaticon.com/512/3742/3742501.png "
+              alt=""
+              title=""
+              class="img-small"
+            />
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/12225/12225935.png"
+              loading="lazy"
+              alt="Profile picture "
+              title="Account info "
+            />
+          </div>
         </div>
         <div className="content-memberInfo">
           <table>
@@ -147,6 +164,7 @@ export default function MemberInfo() {
           </h3>
         </div>
       </div>
+
       <div className="container-about">
         <div className="top">
           <div className="img-about">
@@ -191,14 +209,15 @@ export default function MemberInfo() {
 
         {showForm && (
           <div className="editing">
-            <EditForm 
-              onSave = {() => setShowForm(false)}
-              onUpdate = {fetchDealerTable}
-              id = {id} 
+            <EditForm
+              onSave={() => setShowForm(false)}
+              onUpdate={fetchDealerTable}
+              id={id}
             />
           </div>
         )}
       </div>
+
       <div className="icons">
         <Link to={`/`}>
           <img
