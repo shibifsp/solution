@@ -36,6 +36,9 @@ div.container-details .nav-bar h1 {
   color: #5bee7d; 
   font-size: 24px;
 }
+div.container-details .logos {
+  display: none;
+}
 
 div.content-memberInfo{
   padding: 0px 10px;
@@ -197,6 +200,11 @@ div.icons {
 }
 
 @media ( max-width: 480px ) {
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   div.memberInfo {
     padding: 10px;
     flex-direction: column;
@@ -216,6 +224,7 @@ div.icons {
     width: 32px;
     height: 32px;
     margin-right: 10px;
+    cursor: pointer;
   }
   div.memberInfo div.logos img.fst-img {
     width: 26px;

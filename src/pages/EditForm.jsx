@@ -57,7 +57,7 @@ export default function EditForm({ onSave, id, onUpdate }) {
     
   }
 
-  console.log(editingData)
+  
   return (
     <div className='edit-form'>
       <form onSubmit={postEditedData}>

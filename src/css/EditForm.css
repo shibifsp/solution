@@ -21,7 +21,10 @@ div.container-about div.editing {
 .editing .form-row {
 	margin-bottom: 10px;
 	padding: 10px;
-	text-align-last: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  width: 100%;
 }
 .editing .form-row label {
 	margin-right: 10px;

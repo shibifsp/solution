@@ -337,6 +337,7 @@ div.home-icon img {
   form .button button {
     background: #0B2F9F;
     color: #fdfdff;
+    padding: 8px 24px;
   }
   form .button .clr {
     margin-right: 10px;

@@ -82,25 +82,41 @@ export default function MemberInfo() {
             {personalTotal > 0 ? "For will Give" : "For will Get"}
           </h1>
           <div className="logos">
-            <img
-              src="https://cdn-icons-png.flaticon.com/128/3220/3220642.png"
-              loading="lazy"
-              alt="Shopping list "
-              title="Shopping list "
-              className="fst-img"
-            />
-            <img
-              src="   https://cdn-icons-png.flaticon.com/512/3742/3742501.png "
-              alt=""
-              title=""
-              class="img-small"
-            />
-            <img
-              src="https://cdn-icons-png.flaticon.com/128/12225/12225935.png"
-              loading="lazy"
-              alt="Profile picture "
-              title="Account info "
-            />
+            <Link to={`/`}>
+              <img
+                src="https://cdn-icons-png.flaticon.com/128/3220/3220642.png"
+                loading="lazy"
+                alt="members list logo "
+                title="members list "
+                className="fst-img"
+              />
+            </Link>
+            <Link to={`/calculation/${id}`}>
+              <img
+                src="   https://cdn-icons-png.flaticon.com/512/3742/3742501.png "
+                alt="logo caculation"
+                title="Calculation page"
+                class="img-small"
+              />
+            </Link>
+
+            <Link 
+              to="#"
+              onClick={(e) => {
+                e.preventDefault();
+                const target = document.getElementById("section-about");
+                if(target) {
+                  target.scrollIntoView({behavior: "smooth"})
+                }
+              }}
+            >
+              <img
+                src="https://cdn-icons-png.flaticon.com/128/12225/12225935.png"
+                loading="lazy"
+                alt="logo account "
+                title="Account info "
+              />
+            </Link>
           </div>
         </div>
         <div className="content-memberInfo">
@@ -165,7 +181,7 @@ export default function MemberInfo() {
         </div>
       </div>
 
-      <div className="container-about">
+      <div className="container-about" id="section-about">
         <div className="top">
           <div className="img-about">
             <p>Image</p>
