@@ -163,22 +163,28 @@ div.footer {
 div.footer h2 {
   font-size: 22px;
 }
+div.total-consider span.symbol-rupees {
+  margin-right: 3px;
+  font-size: 22px;
+  font-weight: bold;
+  filter: none;
+}
 div.total-consider {
   display: flex;
   align-items: center;
 }
 div.total-consider span {
   font-size: 12px;
-  margin-right: 10px;
-  filter: opacity(0.6);
+  margin-right: 8px;
+  filter: opacity(0.8);
 }
 
 
 div.history {
   max-width: 900px;
   width: 80%;
+  height: calc(100vh - 360px);
   margin: 18px auto;
-  height: 200px;
   overflow-y: auto;
   scrollbar-width: thin;
 }
@@ -206,7 +212,7 @@ div.history {
   font-weight: bold;
 }
 .history table .td_type {
-  font-size: 11px;
+  font-size: 14px;
   font-weight: bold;
   color: #636262;
 }
@@ -234,7 +240,13 @@ div.home-icon img {
 
 }
 @media ( max-width: 768px) {
-
+  div.calculation {
+    padding: 10px;
+  }
+  div.calculation .container {
+    width: 100%;
+    height: calc(100vh - 20px);
+  }
 }
 @media ( max-width: 640px) {
   div.calculation {
@@ -274,6 +286,9 @@ div.home-icon img {
     font-size: 16px;
   }
   .colum-form .footer h2.total-digit {
+    font-size: 18px;
+  }
+  .colum-form .footer h2 span.symbol-rupees {
     font-size: 18px;
   }
 

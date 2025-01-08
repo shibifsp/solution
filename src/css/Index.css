@@ -96,7 +96,7 @@ div.current-amount {
   font-weight: normal;
 }
 .net-amount .net-balance h2 {
-  margin-left: 3px;
+  margin-left: 5px;
   font-size: 19px;
   color: #272727;
 } 
@@ -153,7 +153,7 @@ div.date .current-date {
 div.row-total {
   background: #fff;
   border-radius: 2px;
-  padding: 10px 5px;
+  padding: 10px 8px;
   flex: 1;
   text-align: right;
 }
@@ -161,6 +161,7 @@ div.row-total {
   color: #524f4f;
   font-weight: bold;
   font-size: 21px;
+  margin-right: 10px;
 }
 .members .member-row .img-delete img {
   width: 19px;
@@ -255,6 +256,9 @@ div.row-total {
   }
   .add-member {
     width: 40%;
+  }
+  .current-total {
+    margin-right: 0;
   }
 }
 

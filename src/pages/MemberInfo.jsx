@@ -23,7 +23,8 @@ export default function MemberInfo() {
       if (error) {
         console.error("Your fetchData isn't fetch", error);
       } else {
-        setDataDefined(data || []);
+        const sorttedData = data.sort((a,b) => new Date(b.date) - new Date(a.date));
+        setDataDefined(sorttedData || []);
       }
     };
     takeData();
@@ -93,20 +94,20 @@ export default function MemberInfo() {
             </Link>
             <Link to={`/calculation/${id}`}>
               <img
-                src="   https://cdn-icons-png.flaticon.com/512/3742/3742501.png "
-                alt="logo caculation"
-                title="Calculation page"
-                class="img-small"
+                src="https://cdn-icons-png.flaticon.com/128/7506/7506073.png"
+                loading="lazy"
+                alt="Calculator "
+                title="Calculation page "
               />
             </Link>
 
-            <Link 
+            <Link
               to="#"
               onClick={(e) => {
                 e.preventDefault();
                 const target = document.getElementById("section-about");
-                if(target) {
-                  target.scrollIntoView({behavior: "smooth"})
+                if (target) {
+                  target.scrollIntoView({ behavior: "smooth" });
                 }
               }}
             >
@@ -115,6 +116,24 @@ export default function MemberInfo() {
                 loading="lazy"
                 alt="logo account "
                 title="Account info "
+              />
+            </Link>
+          </div>
+          <div className="logos-2">
+            <Link to={`/`}>
+              <img
+                src="https://cdn-icons-png.flaticon.com/128/9449/9449216.png"
+                alt="Home"
+                title="Home page"
+                className="home-icon"
+              />
+            </Link>
+            <Link to={`/calculation/${id}`}>
+              <img
+                src="https://cdn-icons-png.flaticon.com/128/7506/7506073.png"
+                loading="lazy"
+                alt="Calculator "
+                title="Calculation page "
               />
             </Link>
           </div>
@@ -145,6 +164,7 @@ export default function MemberInfo() {
                       className="amount"
                       style={{ color: item.type === "C" ? "green" : "red" }}
                     >
+                      <span className="symbol-rupees">{"\u20B9"}</span>
                       {formatedAmount}
                     </td>
                     <td
@@ -176,6 +196,7 @@ export default function MemberInfo() {
             className="sum"
             style={{ color: personalTotal < 0 ? "green" : "red" }}
           >
+            <span className="symbol-rupees">{"\u20B9"}</span>
             {formatedPersonalTotal}
           </h3>
         </div>

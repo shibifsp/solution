@@ -33,7 +33,9 @@ export default function Index() {
     if (error) {
       console.error("Error fetching members", error);
     } else {
-      setMembers(data);
+
+      const sortedData = data.sort((a,b) => new Date(b.date) - new Date(a.date));
+      setMembers(sortedData);
 
       let sumOfCredit = 0;
       let sumOfDebit = 0;
@@ -114,7 +116,10 @@ export default function Index() {
           <div className="net-amount">
             <div className="balance">
               <p>You will Get:</p>
-              <h3 style={{ color: "green" }}>{formatedCreditBalance}</h3>
+              <h3 style={{ color: "green" }}>
+                <span style={{ marginRight: "3px" }}>{`\u20B9`}</span>
+                {formatedCreditBalance}
+              </h3>
             </div>
 
             <div className="net-balance">
@@ -122,12 +127,18 @@ export default function Index() {
               {netAmount > 0 ? (
                 <div className="current-amount">
                   <p>You'll Get:</p>
-                  <h2 style={{ color: "green" }}>{formattedNetAmount}</h2>
+                  <h2 style={{ color: "green" }}>
+                    <span style={{ marginRight: "3px" }}>{`\u20B9`}</span>
+                    {formattedNetAmount}
+                  </h2>
                 </div>
               ) : netAmount < 0 ? (
                 <div className="current-amount">
                   <p> You'll Give:</p>
-                  <h2 style={{ color: "red" }}>{formattedNetAmount}</h2>
+                  <h2 style={{ color: "red" }}>
+                    <span style={{ marginRight: "3px" }}>{`\u20B9`}</span>
+                    {formattedNetAmount}
+                  </h2>
                 </div>
               ) : (
                 netAmount
@@ -136,7 +147,9 @@ export default function Index() {
 
             <div className="balance">
               <p>You will Give:</p>
-              <h3 style={{ color: "red" }}>{formatedDebitBalance}</h3>
+              <h3 style={{ color: "red" }}>
+                {`\u20B9`} {formatedDebitBalance}
+              </h3>
             </div>
           </div>
 
@@ -172,12 +185,8 @@ export default function Index() {
                   const formattedEverySum =
                     absoluteEverySum.toLocaleString("en-US");
 
-
-
-                  const takedDate = members.map(member => new Date(member.date));
-                  const latestDate = new Date(Math.max(...takedDate));
                   const formattedTakedDate =
-                    moment(latestDate).format("DD-MM-YYYY");
+                    moment(member.date).format("DD-MM-YYYY");
 
                   return (
                     <div key={i} className="member-row">
@@ -204,6 +213,9 @@ export default function Index() {
                                   : "black",
                             }}
                           >
+                            <span
+                              style={{ marginRight: "3px" }}
+                            >{`\u20B9`}</span>
                             {formattedEverySum}
                           </p>
                         </div>

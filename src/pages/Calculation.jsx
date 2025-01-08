@@ -61,7 +61,10 @@ export default function Calculation() {
         console.log("fetch sum is error", sumError);
       } else {
         calculateSum(fetchSum);
-        setFetchDatas(fetchSum);
+
+        const sortedDate = fetchSum.sort((a,b) => new Date(b.date) - new Date(a.date));
+        setFetchDatas(sortedDate);
+
         setShowAlert(false);
       }
     };
@@ -73,7 +76,17 @@ export default function Calculation() {
 
   const handleChange = (index, field, value) => {
     const updatedData = [...datas];
-    updatedData[index][field] = value;
+
+    if (field === "amount") {
+      const numericValue = value.replace(/,/g, "");
+
+      if (/^\d*$/.test(numericValue)) {
+        updatedData[index][field] = numericValue;
+      }
+    } else {
+      updatedData[index][field] = value;
+    }
+
     setDatas(updatedData);
 
     if (error) {
@@ -153,7 +166,10 @@ export default function Calculation() {
   };
 
   const addRow = () => {
-    setDatas([...datas, { info: "", amount: "", type: width <= 480 ? "C": "", coustomer_id: id }]);
+    setDatas([
+      ...datas,
+      { info: "", amount: "", type: width <= 480 ? "C" : "", coustomer_id: id },
+    ]);
   };
 
   const deleteRow = (index) => {
@@ -171,10 +187,13 @@ export default function Calculation() {
             <h1>{name}</h1>
           </Link>
           <div className="img-home-icon">
-
             <Link to={`/memberInfo/${id}`}>
-            <img src="https://cdn-icons-png.flaticon.com/512/1027/1027119.png" alt="List" title="List"/>
-      
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/1027/1027119.png"
+                alt="List"
+                title="List"
+              />
+
               {/* <img
                 src="https://cdn-icons-png.flaticon.com/128/12225/12225935.png"
                 loading="lazy"
@@ -273,15 +292,51 @@ export default function Calculation() {
                 {total < 0 ? (
                   <div className="total-consider">
                     <span style={{ color: "#636262" }}>You wil Get</span>
+                    <span className="symbol-rupees">{`\u20B9`}</span>
                     {formatedTotal}
                   </div>
                 ) : (
                   <div className="total-consider">
                     <span style={{ color: "#636262" }}>You wil Give</span>
+                    <span className="symbol-rupees">{`\u20B9`}</span>
                     {formatedTotal}
                   </div>
                 )}
               </h2>
+            </div>
+
+            <div className="history">
+              <table>
+                <thead>
+                  <th>Date</th>
+                  <th>Info</th>
+                  <th>Amount</th>
+                  <th>Type</th>
+                </thead>
+                <tbody>
+                  {fetchDatas.map((data, index) => {
+                    const settedDate = data.date;
+                    const formedDate = moment(settedDate).format("DD-MM-YYYY");
+
+                    const formedAmount = data.amount.toLocaleString("en-US")
+
+                    return (
+                      <tr key={index}>
+                        <td className="td-date">{formedDate}</td>
+                        <td className="info">{data.info}</td>
+                        <td
+                          className="amount"
+                          style={{ color: data.type === "C" ? "green" : "red" }}
+                        >
+                          <span className="symbol-rupees">{"\u20B9"}</span>
+                          {formedAmount}
+                        </td>
+                        <td className="td_type">{data.type}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
           </div>
         ) : (
@@ -289,17 +344,22 @@ export default function Calculation() {
             <div className="footer">
               <h2>Total balance</h2>
               <h2
-                style={{ color: total > 0 ? "red" : "green", fontWeight: "bold" }}
+                style={{
+                  color: total > 0 ? "red" : "green",
+                  fontWeight: "bold",
+                }}
                 className="total-digit"
               >
                 {total < 0 ? (
                   <div className="total-consider">
                     <span style={{ color: "#636262" }}>You wil Get</span>
+                    <span className="symbol-rupees">{`\u20B9`}</span>
                     {formatedTotal}
                   </div>
                 ) : (
                   <div className="total-consider">
                     <span style={{ color: "#636262" }}>You wil Give</span>
+                    <span className="symbol-rupees">{`\u20B9`}</span>
                     {formatedTotal}
                   </div>
                 )}
@@ -314,14 +374,15 @@ export default function Calculation() {
               <div className="parent-rows">
                 {datas.map((row, index) => (
                   <div className="category-row">
-
                     <div className="type-select">
-                      <select 
-                        name="type" 
+                      <select
+                        name="type"
                         id="type"
                         value={row.type}
-                        onChange={(e) => handleChange(index, "type", e.target.value)}
-                        style={{color: row.type === "C" ? "green" : "red"}}
+                        onChange={(e) =>
+                          handleChange(index, "type", e.target.value)
+                        }
+                        style={{ color: row.type === "C" ? "green" : "red" }}
                       >
                         <option value="C">Credit</option>
                         <option value="D">Debit</option>
@@ -333,16 +394,20 @@ export default function Calculation() {
                         type="numeric"
                         id="amount"
                         placeholder="Enter amount"
-                        value={row.amount}
+                        value={
+                          row.amount
+                            ? Number(row.amount).toLocaleString("en-US")
+                            : ""
+                        }
                         onChange={(e) =>
                           handleChange(index, "amount", e.target.value)
                         }
-                        style={{color: row.type === "D" ? "#d92638" : "#26923f"}}
+                        style={{
+                          color: row.type === "D" ? "#d92638" : "#26923f",
+                        }}
                       />
-                      {row.amount && !/^\d*$/.test(row.amount) && (
-                        <div className="error">Please enter a valid number</div>
-                      )}
                     </div>
+
                     <div className="input">
                       <input
                         type="text"
@@ -356,10 +421,7 @@ export default function Calculation() {
                     </div>
 
                     <div className="btn-out">
-                      <button 
-                        type="button" className="add" onClick=
-                        {addRow}
-                      >
+                      <button type="button" className="add" onClick={addRow}>
                         Add row
                       </button>
                       <button
@@ -376,11 +438,14 @@ export default function Calculation() {
 
               <div className="button">
                 <button type="submit">Submit</button>
-                <button type="button" className="clr" onClick={() => setShowAlert(true)}>
+                <button
+                  type="button"
+                  className="clr"
+                  onClick={() => setShowAlert(true)}
+                >
                   clear
                 </button>
               </div>
-
             </form>
           </div>
         )}
@@ -392,9 +457,7 @@ export default function Calculation() {
             onCancel={() => setShowAlert(false)}
           />
         )}
-
       </div>
-
     </div>
   );
 }
